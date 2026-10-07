@@ -1,0 +1,26 @@
+PAIEMENT STRIPE, ALAYA (4 octobre 2026)
+
+Ce qui existe
+  netlify/functions/creer-paiement.js   la fonction serveur : cree la session Stripe Checkout
+  netlify/functions/catalogue.json      les prix qui font foi (110 pieces, 105 payables en ligne)
+  netlify/functions/test_paiement.js    node netlify/functions/test_paiement.js
+  netlify.toml                          le site statique + la fonction
+  site.js                               le formulaire de commande appelle la fonction, puis redirige vers Stripe
+
+Regle : le montant est fixe par le serveur a partir de catalogue.json. Le navigateur n'envoie que
+l'identifiant de la piece et ses options. Seule la carte cadeau porte un montant libre, borne de 50 a 10 000 EUR.
+
+Pour ouvrir le paiement
+  1. Mettre le site sur Netlify (ou toute plateforme qui fait tourner cette fonction).
+  2. Ajouter la variable d'environnement STRIPE_SECRET_KEY (cle secrete Stripe, jamais dans le depot).
+  3. Si le domaine n'est pas alayafinejewelry.com : ALAYA_ORIGINES = liste des adresses du site, separees par des virgules.
+  4. Si la fonction vit ailleurs que sur le domaine du site : definir window.ALAYA_PAIEMENT_URL avant site.js.
+  5. Apple Pay et Google Pay s'activent dans le tableau de bord Stripe (domaine a verifier pour Apple Pay).
+
+Quand un prix change sur une fiche : regenerer catalogue.json (le bloc Python est dans l'historique du 4 octobre,
+il lit data-prix dans piece/*/index.html).
+
+Tant que la cle n'est pas posee, le bouton Payer affiche : "Le paiement en ligne n'est pas encore ouvert."
+Aucune fausse confirmation n'est plus affichee.
+
+Test de bout en bout, Stripe simule : node 10_OUTILS/RENDU/test_paiement_site.js "<dossier du site>"

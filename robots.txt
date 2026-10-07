@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /panier/
+Disallow: /commande/
+Disallow: /recherche/
+
+Sitemap: https://alayafinejewelry.com/sitemap.xml

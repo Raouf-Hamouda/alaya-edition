@@ -1,0 +1,556 @@
+{
+"alliance-alba": {
+"nom": "Alliance Alba",
+"centimes": 80000,
+"image": "images/carre/2023/10/B6-G_F.jpg"
+},
+"alliance-always": {
+"nom": "Alliance Always",
+"centimes": 170000,
+"image": "images/carre/2023/10/B32-G_F.jpg"
+},
+"alliance-barbara": {
+"nom": "Alliance Barbara",
+"centimes": 210000,
+"image": "images/carre/2024/01/B52-G_F.jpg"
+},
+"alliance-daphne": {
+"nom": "Alliance Daphné",
+"centimes": 185000,
+"image": "images/carre/2024/02/B18-G_F.jpg"
+},
+"alliance-desideria": {
+"nom": "Alliance Desideria",
+"centimes": 0,
+"image": "images/carre/2023/10/myczj2f3x2yui60tmkra.jpg"
+},
+"alliance-marta": {
+"nom": "Alliance Marta",
+"centimes": 220000,
+"image": "images/carre/2023/11/B4-G_F-scaled.jpg"
+},
+"alliance-nerina": {
+"nom": "Alliance Nerina",
+"centimes": 245000,
+"image": "images/carre/2023/10/B72-G_F.jpg"
+},
+"alliance-paola": {
+"nom": "Alliance Paola",
+"centimes": 146400,
+"image": "images/carre/2023/10/WhatsApp-Image-2023-10-25-a-19.46.25_02c36cee.jpg"
+},
+"alliance-sofia": {
+"nom": "Alliance Sofia",
+"centimes": 340000,
+"image": "images/carre/2023/10/B5-G_F.jpg"
+},
+"alliance-thea": {
+"nom": "Alliance Théa",
+"centimes": 245000,
+"image": "images/carre/2024/02/B43-G_F.jpg"
+},
+"alliance-vitalia": {
+"nom": "Alliance Vitalia",
+"centimes": 280000,
+"image": "images/carre/2023/10/B71-G_F.jpg"
+},
+"bague-alia-m": {
+"nom": "Bague Alia M",
+"centimes": 473100,
+"image": "images/carre/2023/10/B25-G_F.jpg"
+},
+"bague-alia-xxl-cvd": {
+"nom": "Bague Alia XXL",
+"centimes": 744700,
+"image": "images/carre/2023/10/WhatsApp-Image-2023-10-25-a-21.29.55_6e032712.jpg"
+},
+"bague-alia": {
+"nom": "Bague Alia",
+"centimes": 886000,
+"image": "images/carre/2023/10/WhatsApp-Image-2023-10-27-at-6.17.41-PM.jpg"
+},
+"bague-amanda": {
+"nom": "Bague Amanda",
+"centimes": 206000,
+"image": "images/carre/2023/11/B41-G_F.jpg"
+},
+"bague-anais": {
+"nom": "Bague Anais",
+"centimes": 450000,
+"image": "images/carre/2024/01/B66-G_F.jpg"
+},
+"bague-atomique": {
+"nom": "Bague Atomique",
+"centimes": 288000,
+"image": "images/carre/2023/12/B36-G_F.jpg"
+},
+"bague-aurelia": {
+"nom": "Bague Aurelia",
+"centimes": 280000,
+"image": "images/carre/2023/10/B48-G_F.jpg"
+},
+"bague-barbara": {
+"nom": "Bague Barbara",
+"centimes": 750000,
+"image": "images/carre/2023/12/B54-G_F-2.jpg"
+},
+"bague-bella-canzone": {
+"nom": "Bague bella Canzone",
+"centimes": 301500,
+"image": "images/carre/2023/10/B35-G_F-1.jpg"
+},
+"bague-bianca": {
+"nom": "Bague Bianca",
+"centimes": 670000,
+"image": "images/carre/2023/10/B51-G_F.jpg"
+},
+"bague-camila": {
+"nom": "Bague Camila",
+"centimes": 532500,
+"image": "images/carre/2023/11/B17-G_HL-scaled.jpg"
+},
+"bague-carmela": {
+"nom": "Bague Carmela",
+"centimes": 120000,
+"image": "images/carre/2023/10/B61-G_F.jpg"
+},
+"bague-carmen": {
+"nom": "Bague Carmen",
+"centimes": 380000,
+"image": "images/carre/2023/10/B56-G_F.jpg"
+},
+"bague-cattleya": {
+"nom": "Bague Cattleya",
+"centimes": 463600,
+"image": "images/carre/2023/11/B22-G_F.jpg"
+},
+"bague-chiara": {
+"nom": "Bague Chiara",
+"centimes": 0,
+"image": "images/carre/2023/10/B58-G_F.jpg"
+},
+"bague-chiba": {
+"nom": "Bague Chiba",
+"centimes": 302100,
+"image": "images/carre/2023/12/B38-G_F.jpg"
+},
+"bague-delfina": {
+"nom": "Bague Delfina",
+"centimes": 463000,
+"image": "images/carre/2023/10/B46-G_F.jpg"
+},
+"bague-delicata": {
+"nom": "Bague Delicata",
+"centimes": 145000,
+"image": "images/carre/2023/09/B45-G_F.jpg"
+},
+"bague-elena": {
+"nom": "Bague Elena",
+"centimes": 350000,
+"image": "images/carre/2023/10/B57-G_F.jpg"
+},
+"bague-elettra": {
+"nom": "Bague Elettra",
+"centimes": 190000,
+"image": "images/carre/2023/11/B8-G_F.jpg"
+},
+"bague-elowen": {
+"nom": "Bague Elowen",
+"centimes": 230000,
+"image": "images/carre/2024/01/B65-G_F.jpg"
+},
+"bague-flavia": {
+"nom": "Bague Flavia",
+"centimes": 350000,
+"image": "images/carre/2023/12/B26-G_F.jpg"
+},
+"bague-fulvia": {
+"nom": "Bague Fulvia",
+"centimes": 750000,
+"image": "images/carre/2023/10/pydhixx0bq5ivyh7nkl1.jpg"
+},
+"bague-gilda": {
+"nom": "Bague Gilda",
+"centimes": 0,
+"image": "images/carre/2023/10/image00004-ISO-RGOLD-RU-scaled.jpg"
+},
+"bague-ginevra": {
+"nom": "Bague Ginevra",
+"centimes": 325000,
+"image": "images/carre/2023/10/B59-G_F.jpg"
+},
+"bague-isabella": {
+"nom": "Bague Isabella",
+"centimes": 193600,
+"image": "images/carre/2023/11/B23-G_F.jpg"
+},
+"bague-laltra-carmen": {
+"nom": "Bague Carmen Seconda",
+"centimes": 380000,
+"image": "images/carre/2023/10/B50-G_F.jpg"
+},
+"bague-lucia": {
+"nom": "Bague Lucia",
+"centimes": 450000,
+"image": "images/carre/2024/01/B64-G_F.jpg"
+},
+"bague-lucie": {
+"nom": "Bague Lucie",
+"centimes": 239500,
+"image": "images/carre/2023/11/B20-G_F.jpg"
+},
+"bague-margot": {
+"nom": "Bague Margot",
+"centimes": 989000,
+"image": "images/carre/2023/09/image00005-FINI-ISO-SILVER-scaled.jpg"
+},
+"bague-mariana": {
+"nom": "Bague Mariana",
+"centimes": 950000,
+"image": "images/carre/2024/01/B55-G_HL.jpg"
+},
+"bague-marion": {
+"nom": "Bague Marion",
+"centimes": 473200,
+"image": "images/carre/2023/11/B19-G_F.jpg"
+},
+"bague-martina": {
+"nom": "Bague Martina",
+"centimes": 678000,
+"image": "images/carre/2023/10/B37-G_F-1.jpg"
+},
+"bague-michela": {
+"nom": "Bague Michela",
+"centimes": 0,
+"image": "images/carre/2023/10/ob6jilfpxhllwofmw1ne.jpg"
+},
+"bague-minerva": {
+"nom": "Bague Minerva",
+"centimes": 561000,
+"image": "images/carre/2023/12/B29-G_F.jpg"
+},
+"bague-mirabella": {
+"nom": "Bague Mirabella",
+"centimes": 390000,
+"image": "images/carre/2023/10/B67-G_F.jpg"
+},
+"bague-natalia": {
+"nom": "Bague Natalia",
+"centimes": 999900,
+"image": "images/carre/2023/10/B16-G_HL-scaled.jpg"
+},
+"bague-nerina": {
+"nom": "Bague Nerina",
+"centimes": 345000,
+"image": "images/carre/2023/10/B30-G_F.jpg"
+},
+"bague-nuoce-cuore": {
+"nom": "Bague Nozze Cuore",
+"centimes": 263000,
+"image": "images/carre/2023/10/B40-G_F.jpg"
+},
+"bague-nuoce": {
+"nom": "Bague Nozze",
+"centimes": 260000,
+"image": "images/carre/2023/10/B39-G_F.jpg"
+},
+"bague-oceane-double": {
+"nom": "Bague Océane Double",
+"centimes": 272600,
+"image": "images/carre/2023/11/B24-G_F.jpg"
+},
+"bague-oceane": {
+"nom": "Bague Océane",
+"centimes": 255000,
+"image": "images/carre/2023/09/B44-G_F.jpg"
+},
+"bague-ottavia": {
+"nom": "Bague Ottavia",
+"centimes": 351700,
+"image": "images/carre/2023/11/B12-R-RUB_F.jpg"
+},
+"bague-paloma": {
+"nom": "Bague Paloma",
+"centimes": 264000,
+"image": "images/carre/2023/11/B7-G_F.jpg"
+},
+"bague-pollia": {
+"nom": "Bague Pollia",
+"centimes": 345000,
+"image": "images/carre/2023/10/B27-G_F.jpg"
+},
+"bague-quirina": {
+"nom": "Bague Quirina",
+"centimes": 284500,
+"image": "images/carre/2023/10/B49-G_F.jpg"
+},
+"bague-raquel": {
+"nom": "Bague Raquel",
+"centimes": 260000,
+"image": "images/carre/2024/01/B68-G_F.jpg"
+},
+"bague-sabine": {
+"nom": "Bague Sabine",
+"centimes": 820000,
+"image": "images/carre/2023/10/B63-G_F.jpg"
+},
+"bague-solitaire-barbara": {
+"nom": "Bague Solitaire Barbara",
+"centimes": 540000,
+"image": "images/carre/2024/01/B53-G_F.jpg"
+},
+"bague-tentative": {
+"nom": "Bague Tentazione",
+"centimes": 244000,
+"image": "images/carre/2023/10/B34-G_F.jpg"
+},
+"bague-terentia": {
+"nom": "Bague Terentia",
+"centimes": 323000,
+"image": "images/carre/2023/10/B28-G_F-1.jpg"
+},
+"bague-valentina": {
+"nom": "Bague Valentina",
+"centimes": 274000,
+"image": "images/carre/2023/10/B33-G_F.jpg"
+},
+"bague-viviana": {
+"nom": "Bague Viviana",
+"centimes": 145000,
+"image": "images/carre/2024/02/B70-G-TR-SAPB_F.jpg"
+},
+"bague-zita": {
+"nom": "Bague Zita",
+"centimes": 262000,
+"image": "images/carre/2023/11/B9-G_F.jpg"
+},
+"bague-zoe": {
+"nom": "Bague Zoé",
+"centimes": 2555500,
+"image": "images/carre/2023/10/B69-G-SAPC_HL.jpg"
+},
+"boucles-aurora": {
+"nom": "Boucles Aurora",
+"centimes": 213700,
+"image": "images/carre/2023/11/BO6-G_F.jpg"
+},
+"boucles-elowen": {
+"nom": "Boucles Elowen",
+"centimes": 450000,
+"image": "images/carre/2023/10/BO12-G_F.jpg"
+},
+"boucles-fannia": {
+"nom": "Boucles Fannia",
+"centimes": 185000,
+"image": "images/carre/2024/02/BO17-G_F.jpg"
+},
+"boucles-flora": {
+"nom": "Boucles Flora",
+"centimes": 349000,
+"image": "images/carre/2023/10/BO16-G_F.jpg"
+},
+"boucles-greta": {
+"nom": "Boucles Greta",
+"centimes": 255800,
+"image": "images/carre/2023/11/BO5-G_F-scaled.jpg"
+},
+"boucles-irene": {
+"nom": "Boucles Irene",
+"centimes": 140000,
+"image": "images/carre/2024/01/BO10-G_F.jpg"
+},
+"boucles-isabella": {
+"nom": "Boucles Isabella",
+"centimes": 150000,
+"image": "images/carre/2024/01/BO9-G_F.jpg"
+},
+"boucles-maddalena": {
+"nom": "Boucles Maddalena",
+"centimes": 340000,
+"image": "images/carre/2023/10/image00003-FINI-SILVER-scaled.jpg"
+},
+"boucles-marcella": {
+"nom": "Boucles Marcella",
+"centimes": 334700,
+"image": "images/carre/2023/11/BO2-G_F.jpg"
+},
+"boucles-mariella": {
+"nom": "Boucles Mariella",
+"centimes": 561000,
+"image": "images/carre/2023/11/BO1-G_F.jpg"
+},
+"boucles-mini-aurora": {
+"nom": "Boucles Mini Aurora",
+"centimes": 105600,
+"image": "images/carre/2023/11/BO6-V2-G_F.jpg"
+},
+"boucles-mirabella": {
+"nom": "Boucles Mirabella",
+"centimes": 820000,
+"image": "images/carre/2023/10/BO11-G_F.jpg"
+},
+"boucles-perla": {
+"nom": "Boucles Perla",
+"centimes": 149000,
+"image": "images/carre/2023/11/BO3-G_F.jpg"
+},
+"boucles-rosa": {
+"nom": "Boucles Rosa",
+"centimes": 493800,
+"image": "images/carre/2023/11/COL3-G_F.jpg"
+},
+"boucles-rossella": {
+"nom": "Boucles Rossella",
+"centimes": 390000,
+"image": "images/carre/2023/11/BO8-G-PN_F.jpg"
+},
+"boucles-silvana": {
+"nom": "Boucles Silvana",
+"centimes": 2500000,
+"image": "images/carre/2023/10/BO13-G_F.jpg"
+},
+"boucles-silvia": {
+"nom": "Boucles Silvia",
+"centimes": 222000,
+"image": "images/carre/2024/02/BO18-G_F.jpg"
+},
+"boucles-viviana": {
+"nom": "Boucles Viviana",
+"centimes": 320000,
+"image": "images/carre/2024/02/BO15-G-SAPC-TR_F.jpg"
+},
+"boucles-zaira": {
+"nom": "Boucles Zaira",
+"centimes": 293700,
+"image": "images/carre/2023/11/BO4-G_F.jpg"
+},
+"bracelet-adriana": {
+"nom": "Bracelet Adriana",
+"centimes": 230000,
+"image": "images/carre/2024/01/BR2-G_HL.jpg"
+},
+"bracelet-beatriz": {
+"nom": "Bracelet Beatriz",
+"centimes": 1576500,
+"image": "images/carre/2023/12/BR6-G_F.jpg"
+},
+"bracelet-elena": {
+"nom": "Bracelet Elena",
+"centimes": 320000,
+"image": "images/carre/2024/01/BR5-G_F.jpg"
+},
+"bracelet-esperanza": {
+"nom": "Bracelet Esperanza",
+"centimes": 370000,
+"image": "images/carre/2023/11/BR1-G-SAP_HL.jpg"
+},
+"bracelet-gabriela": {
+"nom": "Bracelet Gabriela",
+"centimes": 170000,
+"image": "images/carre/2024/01/BR4-G_F.jpg"
+},
+"carte-cadeaux": {
+"nom": "Carte cadeau Alaya",
+"centimes": 0,
+"image": "images/2024/01/1419C05MW_120087-scaled-1.webp",
+"libre": {
+"min": 5000,
+"max": 1000000
+}
+},
+"cercle-a-memoire": {
+"nom": "Cercle à Mémoire",
+"centimes": 372500,
+"image": "images/carre/2023/10/mmiuynd2zuby8bxdjyrh.jpg"
+},
+"collier-angelica": {
+"nom": "Collier Angelica",
+"centimes": 350000,
+"image": "images/carre/2023/10/COL13-G_F.jpg"
+},
+"collier-antonia": {
+"nom": "Collier Antonia",
+"centimes": 300000,
+"image": "images/carre/2023/10/COL4-R-RUB_F.jpg"
+},
+"collier-aurora": {
+"nom": "Collier Aurora",
+"centimes": 148000,
+"image": "images/carre/2023/11/COL2-G_F.jpg"
+},
+"collier-carmela": {
+"nom": "Collier Carmela",
+"centimes": 125000,
+"image": "images/carre/2023/09/COL5-G_F.jpg"
+},
+"collier-coralie": {
+"nom": "Collier Coralie",
+"centimes": 450000,
+"image": "images/carre/2024/01/COL8-G_F.jpg"
+},
+"collier-eleonora": {
+"nom": "Collier Eleonora",
+"centimes": 480000,
+"image": "images/carre/2023/10/COL12-G-SAP_F.jpg"
+},
+"collier-elowen": {
+"nom": "Collier Elowen",
+"centimes": 230000,
+"image": "images/carre/2024/01/COL9-G_F.jpg"
+},
+"collier-gemma": {
+"nom": "Collier Gemma",
+"centimes": 245000,
+"image": "images/carre/2023/11/COL1-G-SAP_F.jpg"
+},
+"collier-irene": {
+"nom": "Collier Irène",
+"centimes": 260000,
+"image": "images/carre/2024/02/COL11-G_F.jpg"
+},
+"collier-isabella": {
+"nom": "Collier Isabella",
+"centimes": 110000,
+"image": "images/carre/2024/01/COL6-G_F.jpg"
+},
+"collier-mariella": {
+"nom": "Collier Mariella",
+"centimes": 349300,
+"image": "images/carre/2024/01/B12-G-SAP_F.jpg"
+},
+"collier-mini-aurora": {
+"nom": "Collier mini Aurora",
+"centimes": 98000,
+"image": "images/carre/2023/11/COL2-V2-R_F.jpg"
+},
+"collier-mirabella": {
+"nom": "Collier Mirabella",
+"centimes": 360000,
+"image": "images/carre/2023/10/COL7-G_F.jpg"
+},
+"collier-riviere-beatriz": {
+"nom": "Collier rivière Beatriz",
+"centimes": 2857000,
+"image": "images/carre/2024/01/COL3-G_F.jpg"
+},
+"collier-silvana": {
+"nom": "Collier Silvana",
+"centimes": 500000,
+"image": "images/carre/2023/10/COL10-G_F.jpg"
+},
+"collier-viviana": {
+"nom": "Collier Viviana",
+"centimes": 155000,
+"image": "images/carre/2024/02/COL14-G-SAPC-TR_F.jpg"
+},
+"goute-deau": {
+"nom": "Goutte d’Eau",
+"centimes": 1289000,
+"image": "images/carre/2023/10/ty6kugafikp35q9nccz4-rotated.jpg"
+},
+"solitario-rachele": {
+"nom": "Solitario Rachele",
+"centimes": 335300,
+"image": "images/carre/2023/11/B11-G_F.jpg"
+}
+}

@@ -1,0 +1,2231 @@
+/* Alaya, phase 1.
+   Fond blanc, aucune couleur de marque. Le beige d'Hermes est ecarte volontairement,
+   c'est le seul element de leur page qui soit reconnaissable comme eux.
+   Ce qui est repris d'eux : le systeme typographique (une sans, une serif editoriale,
+   une mono pour les capitales), les titres plus petits que la hierarchie ne le suggere,
+   les liens soulignes plutot que des boutons, sauf le bloc d'achat.
+   La direction artistique n'est pas validee : tout se change dans :root. */
+
+/* les polices sont servies par le site (dossier fonts/, latin et latin etendu) : plus aucun appel a un autre serveur
+   avant d'afficher le texte. Les trois de base sont prechargees dans chaque page. */
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(fonts/eb-garamond-italic-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(fonts/eb-garamond-italic-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(fonts/eb-garamond-normal-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(fonts/eb-garamond-normal-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url(fonts/manrope-normal-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url(fonts/manrope-normal-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Overpass Mono';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(fonts/overpass-mono-normal-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Overpass Mono';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(fonts/overpass-mono-normal-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  --font-primary: "Manrope", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --font-edito: "EB Garamond", Georgia, "Times New Roman", serif;
+  --font-mono: "Overpass Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --fs-h-xxl: 2.125rem;
+  --fs-h-xl: 1.875rem;
+  --fs-h-l: 1.625rem;
+  --fs-h-m: 1.5rem;
+  --fs-h-s: 1.25rem;
+  --fs-body-xl: 1rem;
+  --fs-body-l: .875rem;
+  --fs-body-m: .75rem;
+  --fs-body-d: .6875rem;
+  --fs-body-s: .625rem;
+
+  --bg: #fff;
+  --bg-2: #fafafa;
+  --ink: #111;
+  --ink-soft: #6f6f6f;
+  --rule: #e7e7e7;
+  --placeholder: #f4f4f4;
+
+  --gutter: 24px;
+  --header-h: 140px;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font-primary); font-size: var(--fs-body-l); line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+h1, h2, h3 { font-weight: 400; }
+button { font-family: inherit; }
+
+/* une capitale espacee, en mono : c'est leur signature typographique */
+.mono, .footer h3, .menu-col h3, .chip-label, .topbar, .fil-bas,
+.btn-bordé, .btn-panier, .btn-pay, .acc summary, .surtitre, .tuiles span,
+.btn-filtrer, .block-category span {
+  font-family: var(--font-mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.media { background: var(--placeholder); position: relative; display: flex; align-items: center; justify-content: center; aspect-ratio: 1 / 1; }
+.media::after {
+  content: attr(data-label); font-family: var(--font-mono); font-size: var(--fs-body-s);
+  letter-spacing: .12em; text-transform: uppercase; color: #b3b3b3;
+}
+
+/* ---------------------------------------------- 1. barre de service */
+
+.topbar { border-bottom: 1px solid var(--rule); background: var(--bg); position: relative; z-index: 45; }
+.topbar-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 7px var(--gutter); font-size: var(--fs-body-s);
+}
+.topbar-link { color: var(--ink-soft); }
+.topbar-link:hover { color: var(--ink); }
+.topbar-right { display: flex; gap: 26px; }
+.topbar-btn {
+  background: none; border: 0; cursor: pointer; padding: 0; color: var(--ink);
+  font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .1em; text-transform: uppercase;
+}
+.topbar-btn b { font-weight: 700; }
+.topbar-btn .chev { display: inline-block; transform: translateY(-1px); margin-left: 4px; }
+.topbar-panel { border-top: 1px solid var(--rule); background: var(--bg-2); }
+.topbar-panel-inner { padding: 26px var(--gutter) 30px; max-width: 1500px; margin: 0 auto; }
+.topbar-panel h3 { font-family: var(--font-mono); font-size: var(--fs-body-d); letter-spacing: .14em; text-transform: uppercase; margin: 0 0 16px; }
+.choix { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.choix-btn { background: none; border: 1px solid var(--rule); padding: 7px 14px; cursor: pointer; font-size: var(--fs-body-m); }
+.choix-btn:hover { border-color: var(--ink); }
+.choix-btn.is-on { border-color: var(--ink); background: var(--ink); color: #fff; }
+.choix-btn[disabled] { color: #b4b4b4; cursor: default; }
+.topbar-panel .note { margin: 0; font-size: var(--fs-body-m); }
+
+/* ---------------------------------------------- 2. entete */
+
+.header { position: sticky; top: 0; z-index: 40; background: var(--bg); border-bottom: 1px solid var(--rule); }
+.header-bar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 16px var(--gutter) 10px; }
+.header-search { max-width: 240px; display: flex; align-items: center; gap: 10px; }
+.ico-loupe { flex: none; }
+.header-search input {
+  border: 0; border-bottom: 1px solid var(--ink); background: transparent; font-family: inherit;
+  font-size: var(--fs-body-m); padding: 4px 0; width: 100%; outline: none;
+}
+.logo { text-align: center; font-family: var(--font-edito); font-size: 1.6rem; letter-spacing: .34em; line-height: 1; padding-left: .34em; }
+.logo small { display: block; font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .3em; margin-top: 7px; color: var(--ink-soft); }
+.header-links { display: flex; justify-content: flex-end; gap: 24px; font-size: var(--fs-body-m); }
+.header-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.panier-compte { margin-left: 5px; }
+
+.menu-bar {
+  display: flex; justify-content: center; align-items: center; gap: 30px; margin: 0; padding: 0;
+  font-size: var(--fs-body-m); letter-spacing: .06em; text-transform: uppercase; font-weight: 500;
+}
+.menu-bar > li { list-style: none; position: static; }
+.menu-sep { width: 1px; height: 14px; background: var(--rule); }
+.menu-bar-link { display: block; padding: 4px 2px 13px; border-bottom: 1px solid transparent; }
+.menu-parent:hover .menu-bar-link, .menu-parent:focus-within .menu-bar-link { border-bottom-color: var(--ink); }
+
+.menu-panel { position: absolute; left: 0; right: 0; background: var(--bg); border-top: 1px solid var(--rule); padding: 40px var(--gutter) 60px; display: none; }
+.menu-parent:hover .menu-panel, .menu-parent:focus-within .menu-panel { display: block; }
+.menu-panel-inner { display: grid; grid-template-columns: 340px repeat(3, 1fr); gap: 52px; align-items: start; max-width: 1500px; margin: 0 auto; }
+.menu-panel-inner--court { grid-template-columns: 340px repeat(2, 1fr); }
+.menu-edito { position: relative; display: block; }
+.menu-edito img { aspect-ratio: 16 / 10; object-fit: cover; }
+.menu-edito span {
+  position: absolute; left: 18px; bottom: 16px; color: #fff; font-family: var(--font-mono);
+  font-size: var(--fs-body-m); letter-spacing: .12em; text-transform: uppercase;
+  text-shadow: 0 1px 10px rgba(0,0,0,.6);
+}
+.menu-col h3 { font-size: var(--fs-body-d); margin: 0 0 18px; }
+.menu-col ul { margin: 0; padding: 0; list-style: none; }
+.menu-col li { margin-bottom: 13px; }
+.menu-col a { font-size: var(--fs-body-l); }
+.menu-col a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.menu-col .n { color: var(--ink-soft); font-size: var(--fs-body-s); margin-left: 4px; }
+.menu-col .empty { color: var(--ink-soft); font-size: var(--fs-body-l); font-style: italic; }
+
+/* ---------------------------------------------- 3. home */
+
+.page-home main > * + * { margin-top: 84px; }
+.block-text-on-full-media { position: relative; }
+.block-text-on-full-media::after {
+  content: ""; position: absolute; inset: 40% 0 0 0; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.45) 80%);
+}
+.block-text-on-full-media .hero { width: 100%; aspect-ratio: 16 / 7; object-fit: cover; }
+.block-text-on-full-media .overlay { position: absolute; inset: auto 0 7% 0; z-index: 2; text-align: center; color: #fff; padding: 0 var(--gutter); text-shadow: 0 1px 16px rgba(0,0,0,.5); }
+.block-text-on-full-media h1 { font-family: var(--font-edito); font-size: var(--fs-h-m); margin: 0 0 12px; }
+.block-text-on-full-media p { margin: 0 auto 20px; max-width: 620px; }
+
+.block-category ul { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; list-style: none; margin: 0 auto; padding: 0 var(--gutter); max-width: 1700px; }
+.block-category img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: #fff; }
+.block-category span { display: block; margin-top: 14px; text-align: center; font-size: var(--fs-body-m); }
+.block-category a:hover span { text-decoration: underline; text-underline-offset: 4px; }
+
+.block-text { text-align: center; padding: 0 var(--gutter); max-width: 680px; margin: 0 auto; }
+.block-text h2 { font-family: var(--font-edito); font-size: var(--fs-h-s); margin: 0 0 14px; }
+.block-text p { margin: 0 0 20px; }
+.block-media { padding: 0 var(--gutter); }
+.block-media img { width: 100%; height: auto; }
+.block-media.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+.block-merchandising { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; padding: 0 var(--gutter); max-width: 1700px; margin: 0 auto; }
+.block-seo { max-width: 860px; margin: 0 auto; padding: 0 var(--gutter) 80px; text-align: center; font-size: var(--fs-body-m); color: var(--ink-soft); }
+
+/* ---------------------------------------------- 4. fiche dans une grille */
+
+.product-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: #fff; }
+.product-card .name { margin: 14px 0 4px; font-size: var(--fs-body-l); }
+.product-card .price { margin: 0; font-size: var(--fs-body-m); color: var(--ink-soft); }
+.product-card a:hover .name { text-decoration: underline; text-underline-offset: 4px; }
+
+.cta { display: inline-block; font-family: var(--font-mono); font-size: var(--fs-body-m); letter-spacing: .12em; text-transform: uppercase; border-bottom: 1px solid currentColor; padding-bottom: 3px; }
+
+/* ---------------------------------------------- 5. page de liste */
+
+.breadcrumb { padding: 18px var(--gutter) 0; font-size: var(--fs-body-m); color: var(--ink-soft); }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb .sep { margin: 0 8px; }
+
+.liste-tete { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; padding: 18px var(--gutter) 10px; }
+.surtitre { margin: 0 0 4px; font-size: var(--fs-body-s); color: var(--ink-soft); }
+.liste-tete h1 { font-size: var(--fs-h-m); margin: 0; }
+.liste-tete .count { font-size: var(--fs-body-m); color: var(--ink-soft); }
+.btn-filtrer { background: none; border: 0; cursor: pointer; font-size: var(--fs-body-m); padding: 0 0 4px; border-bottom: 1px solid var(--ink); }
+
+.liste-intro { max-width: 680px; margin: 0 auto; padding: 10px var(--gutter) 0; text-align: center; }
+.liste-intro .edito-img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; margin-bottom: 18px; }
+
+.tuiles { display: grid; grid-template-columns: repeat(var(--n, 4), 1fr); gap: 26px; list-style: none; margin: 30px 0 10px; padding: 0 var(--gutter); }
+.tuiles img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: #fff; }
+.tuiles span { display: block; margin-top: 16px; font-size: var(--fs-body-m); }
+.tuiles a:hover span { text-decoration: underline; text-underline-offset: 4px; }
+
+.filtres { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-top: 18px; padding: 16px var(--gutter); display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.chip-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center; }
+.chip-label { font-size: var(--fs-body-s); color: var(--ink-soft); margin-right: 6px; }
+.chip { font-size: var(--fs-body-m); cursor: pointer; background: none; border: 1px solid var(--rule); padding: 6px 13px; }
+.chip:hover { border-color: var(--ink); }
+.chip.is-on { border-color: var(--ink); background: var(--ink); color: #fff; }
+.chip .n { color: var(--ink-soft); font-size: var(--fs-body-s); margin-left: 5px; }
+.chip.is-on .n { color: #ddd; }
+
+.grid-results { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; padding: 28px var(--gutter) 70px; max-width: 1700px; margin: 0 auto; }
+.grid-results .product-card.is-hidden { display: none; }
+.empty-state { text-align: center; color: var(--ink-soft); padding: 60px var(--gutter) 90px; }
+.empty-state a { border-bottom: 1px solid currentColor; }
+.grid-seo-text { max-width: 860px; margin: 0 auto; padding: 0 var(--gutter) 80px; font-size: var(--fs-body-m); color: var(--ink-soft); text-align: center; }
+.recherche { max-width: 560px; margin: 10px auto 0; padding: 0 var(--gutter); }
+.recherche input { width: 100%; border: 0; border-bottom: 1px solid var(--ink); background: transparent; font-family: inherit; font-size: var(--fs-body-xl); padding: 8px 0; outline: none; }
+
+/* ---------------------------------------------- 6. fiche produit */
+
+.page-fiche main { padding-bottom: 60px; }
+
+.fiche-haut { display: grid; grid-template-columns: 1fr 440px; align-items: start; }
+.gal { position: relative; }
+.gal-groupe { display: grid; grid-template-columns: 1fr; gap: 0; }
+.gal-vue img { width: 100%; height: auto; max-height: 82vh; aspect-ratio: 1 / 1; object-fit: contain; background: #fff; display: block; }
+.gal-vue .media { height: 78vh; }
+.variations { margin: 0 0 22px; }
+.variations-titre { font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 10px; }
+.gal-vigns { display: flex; flex-wrap: wrap; gap: 10px; }
+.gal-vign { display: block; padding: 0; border: 0; background: none; cursor: pointer; width: 46px; line-height: 0; border-radius: 50%; }
+.gal-vign img { width: 46px; height: 46px; object-fit: cover; background: #fff; border-radius: 50%; border: 1px solid var(--rule); transition: border-color .2s; }
+.gal-vign.is-on img { border-color: var(--ink); box-shadow: 0 0 0 2px #fff inset; }
+.gal-vign:hover img { border-color: var(--ink-soft); }
+
+/* le bloc d'achat, pose sur l'image a droite */
+.achat { position: sticky; top: 118px; background: #fff; padding: 22px 40px 40px 28px; }
+.achat h1 { font-family: var(--font-edito); font-size: var(--fs-h-m); margin: 0 0 24px; line-height: 1.2; }
+.sel { border-bottom: 1px solid var(--rule); }
+.sel-tete { width: 100%; display: flex; align-items: center; gap: 10px; background: none; border: 0; cursor: pointer; padding: 15px 0; font-size: var(--fs-body-l); color: var(--ink-soft); text-align: left; }
+.sel-label { flex: 1; }
+.sel-val { color: var(--ink); }
+.sel .chev { transform: scaleX(1.4); }
+.sel.is-open .chev { transform: rotate(90deg) scaleY(1.4); }
+.sel-corps { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 0 16px; }
+.opt { background: none; border: 1px solid var(--rule); padding: 8px 14px; cursor: pointer; font-size: var(--fs-body-m); transition: border-color .2s; }
+.opt--metal { display: inline-flex; align-items: center; gap: 9px; }
+.pastille { width: 13px; height: 13px; border-radius: 50%; display: inline-block; box-shadow: inset 0 0 0 1px rgba(0,0,0,.14); }
+.opt:hover { border-color: var(--ink); }
+.opt.is-on { border-color: var(--ink); color: var(--ink); }
+.achat-guide { text-align: right; padding: 10px 0 0; font-size: var(--fs-body-m); }
+.lien-guide { background: none; border: 0; cursor: pointer; font: inherit; display: inline-flex; align-items: center; gap: 9px; padding: 0; }
+.lien-guide span { border-bottom: 1px solid var(--ink); }
+.ico-regle { flex: none; color: var(--ink-soft); }
+
+.modale { position: fixed; inset: 0; z-index: 80; background: rgba(0,0,0,.28); display: flex; justify-content: flex-end; opacity: 0; transition: opacity .35s ease; }
+.modale.is-open { opacity: 1; }
+.modale[hidden] { display: none; }
+.modale-boite { background: #fff; width: 520px; max-width: 100%; height: 100%; overflow-y: auto; padding: 30px 40px 60px; transform: translateX(40px); transition: transform .45s cubic-bezier(.2,.7,.2,1); }
+.modale.is-open .modale-boite { transform: none; }
+.modale-tete { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; }
+.modale-tete h2 { font-family: var(--font-mono); font-size: var(--fs-body-d); letter-spacing: .16em; text-transform: uppercase; margin: 0; }
+.modale-fermer { background: none; border: 0; cursor: pointer; font-size: 1rem; padding: 0 2px; }
+.table-tailles { width: 100%; border-collapse: collapse; font-size: var(--fs-body-m); margin: 0 0 26px; }
+.table-tailles th { font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .12em; text-transform: uppercase; text-align: left; padding: 0 0 12px; border-bottom: 1px solid var(--ink); font-weight: 400; color: var(--ink-soft); }
+.table-tailles td { padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.table-tailles tbody tr:hover td { color: var(--ink); background: var(--bg-2); }
+.achat-prix { text-align: right; font-size: var(--fs-h-s); margin: 14px 0 18px; }
+.achat-boutons { display: grid; grid-template-columns: 1fr 1.6fr; gap: 0; }
+.btn-pay { background: #fff; border: 1px solid var(--ink); border-right: 0; cursor: pointer; font-size: var(--fs-body-l); letter-spacing: 0; text-transform: none; padding: 16px 10px; }
+.btn-panier { background: var(--ink); color: #fff; border: 1px solid var(--ink); cursor: pointer; font-size: var(--fs-body-m); padding: 16px 10px; text-align: center; }
+.btn-panier--plein { grid-column: 1 / -1; display: block; }
+.btn-panier.is-ok { background-color: var(--ink); border-color: var(--ink); }
+.achat-note { margin: 12px 0 0; font-size: var(--fs-body-s); text-align: center; }
+
+.fiche-bas { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; padding: 60px var(--gutter) 20px; max-width: 1500px; margin: 0 auto; }
+.fiche-texte p { margin: 0 0 16px; }
+.fiche-texte .ref { font-size: var(--fs-body-m); color: var(--ink-soft); }
+.fiche-texte .ref a { border-bottom: 1px solid currentColor; }
+.acc { border-bottom: 1px solid var(--rule); }
+.acc summary { list-style: none; cursor: pointer; padding: 22px 0; font-size: var(--fs-body-d); display: flex; justify-content: space-between; align-items: center; }
+.acc summary::-webkit-details-marker { display: none; }
+.acc summary::after { content: "\203A"; transform: rotate(90deg); font-size: 1.2rem; color: var(--ink-soft); }
+.acc[open] summary::after { transform: rotate(-90deg); }
+.acc-corps { padding: 0 0 22px; font-size: var(--fs-body-l); }
+.attributs { list-style: none; margin: 0 0 14px; padding: 0; }
+.attributs li { margin-bottom: 8px; }
+.attributs span { color: var(--ink-soft); }
+
+.apparentees { padding: 50px var(--gutter) 10px; max-width: 1700px; margin: 0 auto; }
+.apparentees h2 { font-family: var(--font-edito); font-size: var(--fs-h-l); margin: 0 0 24px; }
+.apparentees .grid-results { padding: 0; }
+.fil-bas { display: flex; justify-content: center; gap: 14px; padding: 30px var(--gutter) 60px; font-size: var(--fs-body-s); color: var(--ink-soft); }
+.fil-bas a { border-bottom: 1px solid currentColor; }
+.fil-bas .sep { color: var(--rule); }
+
+/* ---------------------------------------------- 7. panier */
+
+.panier { max-width: 900px; margin: 0 auto; padding: 10px var(--gutter) 90px; }
+.panier-ligne { display: grid; grid-template-columns: 90px 1fr auto; gap: 20px; align-items: center; border-bottom: 1px solid var(--rule); padding: 18px 0; }
+.panier-ligne img { width: 90px; height: 90px; object-fit: cover; background: #fff; }
+.panier-ligne .opts { font-size: var(--fs-body-m); color: var(--ink-soft); margin: 4px 0 0; }
+.panier-ligne .retirer { background: none; border: 0; cursor: pointer; font-size: var(--fs-body-m); color: var(--ink-soft); text-decoration: underline; padding: 0; }
+.panier-total { display: flex; justify-content: space-between; padding: 22px 0; font-size: var(--fs-body-xl); }
+.panier .btn-panier { display: block; text-align: center; }
+
+/* ---------------------------------------------- 8. pages editoriales */
+
+.edito { max-width: 760px; margin: 0 auto; padding: 16px var(--gutter) 90px; }
+.edito h1 { font-family: var(--font-edito); font-size: var(--fs-h-l); margin: 0 0 26px; text-align: center; }
+.edito h2 { font-family: var(--font-edito); font-size: var(--fs-h-s); margin: 34px 0 12px; }
+.edito p { margin: 0 0 16px; }
+.edito .edito-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; margin-bottom: 30px; }
+.edito .note { color: var(--ink-soft); font-size: var(--fs-body-m); }
+
+/* ---------------------------------------------- 9. pied de page */
+
+.footer { border-top: 1px solid var(--rule); }
+.footer-columns { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; max-width: 1500px; margin: 0 auto; padding: 56px var(--gutter) 46px; }
+.footer h3 { font-size: var(--fs-body-d); margin: 0 0 18px; }
+.footer ul { margin: 0; padding: 0; list-style: none; }
+.footer li { margin-bottom: 11px; font-size: var(--fs-body-m); }
+.footer a:not(.btn-bordé):hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.footer-service { border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 36px; max-width: 1500px; margin: 0 auto; padding: 44px var(--gutter); }
+.fs-col p { margin: 0 0 10px; font-size: var(--fs-body-m); }
+.fs-col p a, .socials a { border-bottom: 1px solid var(--rule); }
+.fs-col p a:hover, .socials a:hover { border-bottom-color: var(--ink); text-decoration: none; }
+.fs-news { text-align: center; }
+.fs-social { text-align: right; }
+.socials { display: flex; gap: 18px; justify-content: flex-end; font-size: var(--fs-body-m); }
+.btn-bordé { display: inline-block; border: 1px solid var(--ink); padding: 15px 38px; font-size: var(--fs-body-m); line-height: 1; }
+.btn-bordé:hover { background: var(--ink); color: #fff; text-decoration: none; }
+
+.footer-emplacement { border-top: 1px solid var(--rule); background: var(--bg-2); padding: 18px var(--gutter); }
+.footer-bottom { display: flex; flex-wrap: wrap; gap: 18px; justify-content: space-between; border-top: 1px solid var(--rule); padding: 20px var(--gutter); font-size: var(--fs-body-m); color: var(--ink-soft); }
+
+/* ---------------------------------------------- 10. mobile */
+
+.menu-burger { display: none; background: none; border: 0; cursor: pointer; text-align: left; }
+.menu-vertical { display: none; }
+.menu-scrim { display: none; }
+
+@media (max-width: 1180px) {
+  .menu-panel-inner { grid-template-columns: 260px repeat(3, 1fr); gap: 34px; }
+  .menu-panel-inner--court { grid-template-columns: 260px repeat(2, 1fr); }
+  .block-category ul { grid-template-columns: repeat(3, 1fr); }
+  .grid-results { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .fiche-haut { grid-template-columns: 1fr 380px; }
+  .fiche-bas { gap: 40px; }
+}
+
+@media (max-width: 900px) {
+  :root { --header-h: 92px; }
+  .header-bar { grid-template-columns: auto 1fr auto; padding: 12px var(--gutter); }
+  .header-search { display: none; }
+  .header-links a:first-child { display: none; }
+  .menu-bar { display: none; }
+  .menu-burger { display: block; font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .12em; text-transform: uppercase; }
+  .topbar-link { display: none; }
+  .topbar-inner { justify-content: flex-end; }
+
+  .menu-vertical {
+    display: block; position: fixed; inset: 0 14% 0 0; background: #fff; padding: 0 0 60px;
+    overflow-y: auto; z-index: 60; transform: translateX(-100%); transition: transform .28s ease; border-right: 1px solid var(--rule);
+  }
+  .menu-vertical.is-open { transform: none; }
+  .mv-tete { display: flex; align-items: center; gap: 14px; padding: 18px 22px 20px; }
+  .mv-search { flex: 1; display: flex; align-items: center; gap: 10px; }
+  .mv-search input { flex: 1; border: 0; border-bottom: 1px solid var(--ink); background: transparent; font-family: inherit; font-size: var(--fs-body-l); padding: 5px 0; outline: none; }
+  .menu-close { background: none; border: 0; cursor: pointer; font-size: 1rem; padding: 0 2px; }
+  .mv-vue { padding: 0 22px; }
+  .mv-vue ul { list-style: none; margin: 0 0 34px; padding: 0; }
+  .mv-vue li { margin-bottom: 22px; }
+  .mv-vue a, .mv-vers { display: flex; justify-content: space-between; width: 100%; background: none; border: 0; padding: 0; text-align: left; cursor: pointer; font-family: inherit; font-size: var(--fs-body-xl); letter-spacing: .14em; text-transform: uppercase; color: inherit; }
+  .mv-vers .chev { color: var(--ink-soft); }
+  .mv-titre { font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); margin: 26px 0 26px; }
+  .mv-pref { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; border-top: 1px solid var(--rule); padding-top: 26px; }
+  .btn-retour {
+    display: inline-flex; align-items: center; gap: 10px; background: var(--bg-2); border: 0;
+    border-radius: 999px; padding: 13px 24px; cursor: pointer; font-family: var(--font-mono);
+    font-size: var(--fs-body-s); letter-spacing: .12em; text-transform: uppercase; color: var(--ink);
+  }
+  .btn-retour:hover { background: #efefec; }
+  .menu-scrim { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.25); z-index: 50; opacity: 0; pointer-events: none; transition: opacity .28s ease; }
+  .menu-scrim.is-on { opacity: 1; pointer-events: auto; }
+
+  .block-category ul, .tuiles { grid-template-columns: repeat(2, 1fr); }
+  .block-merchandising, .grid-results { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .block-media.pair { grid-template-columns: 1fr; }
+  .page-home main > * + * { margin-top: 56px; }
+
+  .block-text-on-full-media .hero { aspect-ratio: 3 / 4; }
+  .block-text-on-full-media::after { inset: 22% 0 0 0; }
+  .fiche-haut { grid-template-columns: 1fr; }
+  .gal { grid-template-columns: 1fr; }
+  .gal-vue img, .gal-vue .media { height: 58vh; }
+  
+  .achat { position: static; padding: 26px var(--gutter) 10px; }
+  .fiche-bas { grid-template-columns: 1fr; gap: 20px; padding-top: 30px; }
+  .footer-columns { grid-template-columns: 1fr 1fr; }
+  .footer-service { grid-template-columns: 1fr; }
+  .fs-news, .fs-social { text-align: left; }
+  .socials { justify-content: flex-start; }
+}
+
+/* Page Toute la collection : ouverture, chapitres dans la grille, voir plus. */
+.liste-ouverture { position: relative; margin: 0 0 6px; }
+.liste-ouverture img { width: 100%; aspect-ratio: 21 / 8; object-fit: cover; display: block; }
+.liste-ouverture::after { content: ""; position: absolute; inset: 40% 0 0 0; background: linear-gradient(180deg, transparent, rgba(0,0,0,.42)); }
+.liste-ouverture-texte { position: absolute; left: 0; right: 0; bottom: 8%; z-index: 2; text-align: center; color: #fff; padding: 0 var(--gutter); text-shadow: 0 1px 14px rgba(0,0,0,.45); }
+.liste-ouverture-texte .surtitre { color: #fff; opacity: .85; margin-bottom: 10px; }
+.liste-ouverture-texte h1 { font-family: var(--font-edito); font-size: var(--fs-h-l); font-weight: 400; margin: 0 0 12px; }
+.liste-ouverture-texte h1 .count { color: #fff; opacity: .7; }
+.liste-ouverture-texte p:not(.surtitre) { max-width: 620px; margin: 0 auto; }
+.tuiles-titre { font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft); text-align: center; margin: 34px 0 0; }
+.liste-tete--filtres { padding-top: 0; padding-bottom: 0; margin-top: -8px; }
+.grid-results--large { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; }
+.grid-results--large .product-card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: #fff; }
+.grid-chapitre { grid-column: 1 / -1; position: relative; display: block; margin: 26px 0; overflow: hidden; }
+.grid-chapitre img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; display: block; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+.grid-chapitre:hover img { transform: scale(1.02); }
+.grid-chapitre::after { content: ""; position: absolute; inset: 45% 0 0 0; background: linear-gradient(180deg, transparent, rgba(0,0,0,.45)); }
+.grid-chapitre-texte { position: absolute; left: 6%; bottom: 10%; z-index: 2; color: #fff; text-shadow: 0 1px 12px rgba(0,0,0,.45); max-width: 60%; }
+.grid-chapitre-texte .surtitre { display: block; color: #fff; opacity: .85; margin-bottom: 8px; }
+.grid-chapitre-texte .ligne { display: block; font-family: var(--font-edito); font-size: var(--fs-h-s); margin-bottom: 14px; }
+.grid-chapitre-texte .cta { color: #fff; }
+.grid-results .product-card.is-more, .grid-results .grid-chapitre.is-more { display: none; }
+.grid-result-footer { text-align: center; padding: 10px var(--gutter) 60px; }
+.grid-result-footer .btn-voir-plus { background: none; border: 0; border-bottom: 1px solid currentColor; cursor: pointer; color: var(--ink); }
+.grid-compteur { font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .12em; color: var(--ink-soft); margin: 14px 0 0; }
+@media (max-width: 1180px) { .grid-results--large { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .liste-ouverture img { aspect-ratio: 4 / 3; } .grid-chapitre img { aspect-ratio: 4 / 3; } .grid-chapitre-texte { max-width: 84%; } }
+
+.liste-ouverture--nue::after { display: none; }
+.liste-ouverture--nue img { aspect-ratio: 21 / 7; }
+.liste-intro-ligne { max-width: 640px; margin: 0 auto; padding: 4px var(--gutter) 0; text-align: center; color: var(--ink-soft); }
+
+/* Emplacements de textes juridiques, visibles et vides. */
+.edito--legal { max-width: 720px; }
+.emplacement-texte { border: 1px dashed var(--rule); padding: 26px 28px; color: var(--ink-soft); background: var(--bg-2); }
+.emplacement-etiquette { font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .18em; text-transform: uppercase; margin: 0 0 10px; color: var(--ink-soft); }
+.emplacement-texte p:last-child { margin: 0; }
+
+.note-specs { font-size: var(--fs-body-s); color: var(--ink-soft); margin: 14px 0 0; }
+.lien-pierre a { border-bottom: 1px solid currentColor; }
+.lien-guide span { border-bottom: 1px solid var(--ink); }
+
+/* Cadeaux */
+.tuiles--cadeaux li a { display: block; }
+.tuiles--cadeaux figure { margin: 0 0 12px; aspect-ratio: 4 / 3; overflow: hidden; }
+.tuiles--cadeaux figure img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: auto; transition: transform 1s cubic-bezier(.2,.7,.2,1); }
+.tuiles--cadeaux a:hover img { transform: scale(1.03); }
+.tuiles--cadeaux .t-titre { display: block; font-family: var(--font-edito); font-size: var(--fs-h-s); }
+.tuiles--cadeaux .t-sous { display: block; font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); margin-top: 4px; }
+.tuiles--cadeaux a:hover .t-titre { text-decoration: underline; text-underline-offset: 5px; }
+.chapitre-carte { margin: 40px var(--gutter) 60px; display: block; }
+.page-liste .block-text { margin: 30px auto 40px; }
+.achat-ligne { color: var(--ink-soft); margin: -8px 0 22px; }
+.fiche-haut--carte .gal-vue img { aspect-ratio: 4 / 3; object-fit: cover; }
+.achat-prix--vide { color: var(--ink-soft); font-size: var(--fs-body-l); }
+.montant-libre { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--rule); padding: 6px 12px; font-size: var(--fs-body-m); }
+.montant-libre input { width: 90px; border: 0; border-bottom: 1px solid var(--ink); font: inherit; padding: 2px 0; outline: none; }
+.offrir-opt { display: flex; align-items: center; gap: 10px; padding: 14px 0 4px; cursor: pointer; font-size: var(--fs-body-m); }
+.offrir-opt input { width: 15px; height: 15px; margin: 0; accent-color: #111; }
+.offrir-opt small { color: var(--ink-soft); font-size: var(--fs-body-s); }
+
+/* Cadeaux : deux voies */
+.deux-voies { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; padding: 26px var(--gutter) 10px; max-width: 1500px; margin: 0 auto; }
+.voie { position: relative; display: block; overflow: hidden; }
+.voie img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+.voie:hover img { transform: scale(1.02); }
+.voie::after { content: ""; position: absolute; inset: 40% 0 0 0; background: linear-gradient(180deg, transparent, rgba(0,0,0,.5)); }
+.voie-texte { position: absolute; left: 7%; right: 7%; bottom: 9%; z-index: 2; color: #fff; text-shadow: 0 1px 12px rgba(0,0,0,.45); }
+.voie-texte .surtitre { display: block; color: #fff; opacity: .8; margin-bottom: 8px; }
+.voie-titre { display: block; font-family: var(--font-edito); font-size: var(--fs-h-l); margin-bottom: 8px; }
+.voie-ligne { display: block; max-width: 34ch; margin-bottom: 16px; }
+.voie-texte .cta { color: #fff; }
+.bloc-reassurance { margin-top: 20px; }
+/* Fiche : accordeons et carte d'achat resserres, a la Hermes */
+.acc summary { padding: 16px 0; font-size: var(--fs-body-d); }
+.acc-corps { padding: 0 0 18px; font-size: var(--fs-body-m); line-height: 1.6; }
+.acc-corps p { margin: 0 0 10px; }
+.attributs li { font-size: var(--fs-body-m); }
+.fiche-texte { font-size: var(--fs-body-m); line-height: 1.6; }
+.fiche-texte p { margin: 0 0 12px; }
+.fiche-haut--carte { grid-template-columns: 1fr 440px; }
+.fiche-haut--carte .gal-vue img { aspect-ratio: 1 / 1; max-height: 64vh; object-fit: cover; }
+.opt--montant { min-width: 74px; text-align: center; }
+@media (max-width: 900px) { .deux-voies { grid-template-columns: 1fr; } }
+
+.acc-sous { margin: 0 0 6px; }
+.acc-sous + .acc-liste { margin-bottom: 14px; }
+.acc-liste { margin: 0 0 12px; padding-left: 0; list-style: none; }
+.acc-liste li { margin: 0 0 6px; }
+.acc-sous { color: var(--ink); }
+.acc-liste a { border-bottom: 1px solid currentColor; }
+
+/* ================================================================
+   21 aout 2026, passe Hermes : typographie, rythme, menu, fiche.
+   Tout est en fin de fichier, rien n'a ete supprime au-dessus.
+   ================================================================ */
+
+:root {
+  --fs-h-xxl: 2.75rem;
+  --fs-h-xl: 2.25rem;
+  --fs-h-l: 1.875rem;
+  --fs-h-m: 1.625rem;
+  --fs-h-s: 1.3125rem;
+  --fs-body-xl: 1.0625rem;
+  --fs-body-l: .9375rem;
+  --fs-body-m: .8125rem;
+  --fs-body-d: .75rem;
+  --fs-body-s: .6875rem;
+  --gutter: 44px;
+  --rule: #e4e4e4;
+}
+
+body { font-size: var(--fs-body-l); line-height: 1.6; }
+
+/* --- barre de service : une ligne discrete, plus de capitales espacees */
+.topbar-inner { padding: 10px var(--gutter); font-size: var(--fs-body-d); }
+.topbar { font-family: var(--font-primary); letter-spacing: 0; text-transform: none; }
+.topbar-btn { font-family: var(--font-primary); font-size: var(--fs-body-d); letter-spacing: 0; text-transform: none; color: var(--ink-soft); }
+.topbar-btn b { font-weight: 600; color: var(--ink); }
+.topbar-panel h3 { font-family: var(--font-primary); font-size: var(--fs-body-d); letter-spacing: .06em; font-weight: 700; }
+
+/* --- entete */
+.header-bar { padding: 22px var(--gutter) 12px; }
+.logo { font-size: 2rem; letter-spacing: .4em; padding-left: .4em; }
+.logo small { font-family: var(--font-primary); font-size: .625rem; letter-spacing: .34em; margin-top: 9px; }
+.header-links { gap: 28px; font-size: var(--fs-body-l); }
+.header-search input { font-size: var(--fs-body-m); }
+.menu-bar { gap: 36px; font-size: var(--fs-body-m); letter-spacing: .07em; font-weight: 500; }
+.menu-bar-link { padding: 6px 2px 17px; }
+
+/* --- panneau de menu.
+   La barre imposait text-transform:uppercase a tout ce qu'elle contient,
+   le panneau heritait : c'est ce qui faisait le menu en capitales. */
+.menu-panel { padding: 0 0 60px; }
+.menu-panel-inner {
+  text-transform: none; letter-spacing: normal; font-weight: 400;
+  grid-template-columns: 300px repeat(3, minmax(0, 1fr));
+  gap: 0 72px; max-width: 1600px; padding: 46px var(--gutter) 0;
+}
+.menu-panel-inner--court { grid-template-columns: 300px repeat(2, minmax(0, 1fr)); }
+.menu-edito img { aspect-ratio: 4 / 5; }
+.menu-edito span {
+  font-family: var(--font-primary); font-size: var(--fs-body-d);
+  letter-spacing: .1em; left: 22px; bottom: 20px;
+}
+.menu-col h3 {
+  font-family: var(--font-primary); font-size: var(--fs-body-d); font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; margin: 0 0 24px; line-height: 1.2;
+}
+.menu-col li { margin-bottom: 15px; }
+.menu-col a { font-size: var(--fs-body-l); color: var(--ink); }
+.menu-col .n { display: none; }
+.menu-col .empty { font-style: normal; font-size: var(--fs-body-l); }
+
+/* --- home : plus d'air entre les blocs, moins de capitales */
+.page-home main > * + * { margin-top: 108px; }
+.block-text-on-full-media .hero { aspect-ratio: 16 / 8; }
+.block-text-on-full-media h1 { font-size: var(--fs-h-l); margin: 0 0 16px; }
+.block-text-on-full-media p { font-size: 1rem; max-width: 660px; margin-bottom: 26px; }
+.block-category ul { gap: 30px; }
+.block-category span {
+  font-family: var(--font-primary); text-transform: none; letter-spacing: normal;
+  font-size: var(--fs-body-l); margin-top: 20px;
+}
+.block-text { max-width: 720px; }
+.block-text h2 { font-size: var(--fs-h-l); margin: 0 0 18px; }
+.block-text p { font-size: 1rem; margin: 0 0 26px; }
+.block-media.pair { gap: 26px; }
+.block-merchandising { gap: 30px; }
+
+.product-card .name { margin: 18px 0 5px; font-size: var(--fs-body-l); }
+.product-card .price { font-size: var(--fs-body-l); }
+
+/* --- pages de liste */
+.breadcrumb { padding: 22px var(--gutter) 0; }
+.liste-tete { padding: 26px var(--gutter) 14px; }
+.liste-tete h1 { font-size: var(--fs-h-l); }
+.tuiles { gap: 30px; margin: 40px 0 14px; }
+.tuiles span {
+  font-family: var(--font-primary); text-transform: none; letter-spacing: normal;
+  font-size: var(--fs-body-l); margin-top: 18px;
+}
+.tuiles--cadeaux .t-sous { text-transform: uppercase; letter-spacing: .12em; }
+.grid-results { gap: 30px; padding: 34px var(--gutter) 90px; }
+
+/* --- fiche produit : l'image tenue, la carte d'achat calee en haut a droite */
+.fiche-haut, .fiche-haut--carte { grid-template-columns: minmax(0, 1fr) 460px; align-items: start; }
+.gal { display: flex; align-items: flex-start; justify-content: center; padding: 26px var(--gutter) 30px; }
+.gal-groupe { width: 100%; }
+.gal-vue img, .fiche-haut--carte .gal-vue img {
+  aspect-ratio: 1 / 1; max-height: 60vh; max-width: 620px; object-fit: contain; margin: 0 auto;
+}
+.achat { top: 96px; padding: 30px 44px 46px 40px; border-left: 1px solid var(--rule); }
+.achat h1 { font-size: var(--fs-h-l); margin: 0 0 28px; }
+.variations-titre { font-family: var(--font-primary); font-size: var(--fs-body-s); letter-spacing: .1em; font-weight: 600; }
+.sel-tete { padding: 17px 0; font-size: var(--fs-body-l); }
+.achat-prix { font-size: var(--fs-h-s); margin: 20px 0 20px; }
+.btn-panier { font-size: var(--fs-body-d); letter-spacing: .13em; padding: 19px 10px; }
+.btn-pay { padding: 19px 10px; }
+.achat-flash { margin: 14px 0 0; font-size: var(--fs-body-m); color: var(--ink); }
+.achat-flash a { border-bottom: 1px solid currentColor; }
+.achat-flash--erreur { color: #9c2b2b; }
+.fiche-bas { padding: 70px var(--gutter) 30px; gap: 90px; }
+.acc summary { font-size: var(--fs-body-d); letter-spacing: .11em; }
+.apparentees { padding: 70px var(--gutter) 10px; }
+.apparentees h2 { font-size: var(--fs-h-l); margin: 0 0 30px; }
+
+/* --- panier */
+.panier { max-width: 960px; padding: 20px var(--gutter) 110px; }
+.panier-ligne { grid-template-columns: 110px 1fr auto; padding: 24px 0; }
+.panier-ligne img { width: 110px; height: 110px; }
+
+/* --- pages editoriales */
+.edito { max-width: 780px; padding: 24px var(--gutter) 110px; }
+.edito h1 { font-size: var(--fs-h-l); margin: 0 0 34px; }
+
+@media (max-width: 1024px) {
+  :root { --gutter: 22px; }
+  .menu-panel-inner, .menu-panel-inner--court { grid-template-columns: 1fr; gap: 34px; }
+  .fiche-haut, .fiche-haut--carte { grid-template-columns: 1fr; }
+  .achat { border-left: 0; }
+}
+
+/* Les carres ont ete recomposes a 62 % de remplissage : dans une vignette
+   le bijou parait perdu. On recadre a l'affichage, l'image reste intacte. */
+.block-category img, .tuiles img, .product-card img, .menu-edito img { object-view-box: inset(9%); }
+/* sauf les visuels deja cadres en 4/3 des tuiles Cadeaux */
+.tuiles--cadeaux figure img { object-view-box: none; }
+
+/* ================================================================
+   21 aout, soir : le panneau de menu a leur geometrie, et du mouvement.
+   Valeurs relevees dans clone_hermes / references/hermes_source :
+   label de colonne body-s, line-height 14px, letter-spacing 1px, gras 700 ;
+   apparition slide-in-up .8s ease ; transitions .3s ease-in-out.
+   ================================================================ */
+
+.menu-panel-inner {
+  grid-template-columns: 340px repeat(3, minmax(0, 1fr));
+  gap: 0 78px; padding: 44px var(--gutter) 58px;
+}
+.menu-panel-inner--court { grid-template-columns: 340px repeat(2, minmax(0, 1fr)); }
+.menu-edito img { aspect-ratio: 16 / 9; }
+.menu-edito span {
+  font-family: var(--font-primary); font-weight: 700; font-size: var(--fs-body-m);
+  letter-spacing: .02em; left: 16px; bottom: 12px; text-shadow: 0 1px 8px rgba(0,0,0,.55);
+}
+.menu-col h3 {
+  font-size: var(--fs-body-s); line-height: 14px; letter-spacing: .1em;
+  font-weight: 700; margin: 0 0 26px;
+}
+.menu-col li { margin-bottom: 14px; }
+.menu-col a { transition: opacity .15s ease-in-out; }
+.menu-col a:hover { text-decoration: none; opacity: .55; }
+
+/* le panneau se pose, il n'apparait pas d'un coup */
+.menu-parent:hover .menu-panel, .menu-parent:focus-within .menu-panel {
+  animation: pose-panneau .26s ease-in-out;
+}
+@keyframes pose-panneau {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* --- le bijou s'approche quand on le survole */
+.product-card a, .block-category a, .tuiles a { display: block; overflow: hidden; }
+.product-card img, .block-category img, .tuiles img {
+  transition: transform .6s cubic-bezier(.2,.7,.2,1);
+}
+.product-card a:hover img, .block-category a:hover img, .tuiles a:hover img { transform: scale(1.045); }
+
+/* --- le trait des liens d'action s'efface au survol, comme chez eux */
+.cta { transition: border-color .3s ease-in-out; }
+.cta:hover { border-bottom-color: transparent; }
+
+/* --- les blocs montent en arrivant. Sans JS, tout reste en place. */
+.js .js-anim { transform: translateY(56px); }
+.js .js-anim.est-la { transform: none; transition: transform .8s ease; }
+.block-text.js-anim.est-la { transition: transform 1.2s ease; }
+
+/* --- le tiroir de confirmation du panier */
+.pf-ligne { display: grid; grid-template-columns: 96px 1fr; gap: 18px; align-items: center; margin-bottom: 30px; }
+.pf-ligne img { width: 96px; height: 96px; object-fit: contain; background: #fff; }
+.pf-nom { margin: 0 0 6px; font-size: var(--fs-body-xl); }
+.pf-opts { margin: 0 0 6px; font-size: var(--fs-body-m); color: var(--ink-soft); }
+.pf-prix { margin: 0; font-size: var(--fs-body-l); }
+.pf-continuer {
+  display: block; width: 100%; margin-top: 12px; background: none; border: 1px solid var(--rule);
+  padding: 15px 10px; cursor: pointer; font-family: inherit; font-size: var(--fs-body-m);
+  transition: border-color .3s ease-in-out;
+}
+.pf-continuer:hover { border-color: var(--ink); }
+.pf-total { display: flex; justify-content: space-between; border-top: 1px solid var(--rule); padding-top: 16px; margin-bottom: 22px; font-size: var(--fs-body-m); color: var(--ink-soft); }
+
+@media (prefers-reduced-motion: reduce) {
+  .js-anim, .js-anim.est-la { transform: none; transition: none; }
+  .menu-parent:hover .menu-panel { animation: none; }
+  .product-card a:hover img, .block-category a:hover img, .tuiles a:hover img { transform: none; }
+}
+
+/* ================================================================
+   Le tunnel de commande, l'ajout rapide depuis la grille, les langues.
+   ================================================================ */
+
+.page-commande { max-width: 1500px; margin: 0 auto; padding: 0 var(--gutter) 100px; }
+.retour-boutique { display: inline-block; margin: 26px 0 6px; font-size: var(--fs-body-m); }
+.retour-boutique:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.etapes ol { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); margin: 26px 0 46px; padding: 0; }
+.etapes li { position: relative; text-align: center; font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); padding-top: 26px; }
+.etapes li::before { content: ""; position: absolute; top: 6px; left: 0; right: 0; height: 1px; background: var(--rule); }
+.etapes li:first-child::before { left: 50%; }
+.etapes li:last-child::before { right: 50%; }
+.etapes .pt { position: absolute; top: 1px; left: 50%; margin-left: -6px; width: 11px; height: 11px; border-radius: 50%; border: 1px solid var(--ink-soft); background: #fff; }
+.etapes .est-la { color: var(--ink); }
+.etapes .est-la .pt, .etapes .est-faite .pt { background: var(--ink); border-color: var(--ink); }
+.etapes .est-faite { color: var(--ink); }
+
+.commande-grille { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 60px; align-items: start; }
+.commande-corps { min-height: 320px; }
+.bloc-service { background: var(--bg-2); padding: 28px 30px; margin-bottom: 18px; }
+.bloc-service h2 { font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .16em; text-transform: uppercase; margin: 0 0 16px; font-weight: 400; }
+.bloc-service p { margin: 0 0 12px; font-size: var(--fs-body-m); line-height: 1.7; }
+.bloc-service p:last-child { margin-bottom: 0; }
+.bloc-service a { border-bottom: 1px solid currentColor; }
+.bloc-service--rassure { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.bloc-service--rassure a { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; border: 0; font-size: var(--fs-body-s); }
+.bloc-service--rassure a span { border-bottom: 1px solid var(--rule); padding-bottom: 3px; }
+.bloc-recap .panier-ligne { grid-template-columns: 64px 1fr auto; gap: 14px; padding: 14px 0; }
+.bloc-recap .panier-ligne img { width: 64px; height: 64px; }
+.bloc-recap .panier-total { font-size: var(--fs-body-l); padding: 16px 0; }
+.lien-souligne { border-bottom: 1px solid currentColor; font-size: var(--fs-body-m); }
+
+.panier-vide { text-align: center; padding: 70px 0 80px; color: var(--ink-soft); }
+.panier-vide svg { margin: 0 auto 22px; }
+.panier-vide p { margin: 0 0 26px; color: var(--ink); }
+.panier-vide .btn-panier { display: inline-block; padding: 17px 40px; }
+.panier .btn-panier--plein { margin-top: 26px; }
+
+.form-commande { max-width: 640px; }
+.titre-bloc { font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .16em; text-transform: uppercase; font-weight: 400; margin: 34px 0 20px; padding-bottom: 12px; border-bottom: 1px solid var(--rule); }
+.form-commande .titre-bloc:first-child { margin-top: 0; }
+.champs { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 24px; }
+.champs label { display: block; }
+.champs .large { grid-column: 1 / -1; }
+.champs span { display: block; font-size: var(--fs-body-m); color: var(--ink-soft); margin-bottom: 7px; }
+.champs input, .champs select {
+  width: 100%; border: 0; border-bottom: 1px solid var(--rule); background: transparent;
+  font-family: inherit; font-size: var(--fs-body-l); padding: 9px 0; outline: none;
+  transition: border-color .3s ease-in-out;
+}
+.champs input:focus, .champs select:focus { border-bottom-color: var(--ink); }
+.champs input.est-vide { border-bottom-color: #9c2b2b; }
+.case-cadeau { display: flex; align-items: center; gap: 11px; margin: 26px 0 0; font-size: var(--fs-body-m); cursor: pointer; }
+.case-cadeau input { width: 15px; height: 15px; accent-color: #111; margin: 0; }
+.form-commande .emplacement-texte { margin-bottom: 26px; }
+.erreur-form { color: #9c2b2b; font-size: var(--fs-body-m); margin: 0 0 14px; }
+#btn-payer { width: 100%; }
+
+.commande-fin { max-width: 620px; margin: 40px auto 0; text-align: center; }
+.commande-fin h1 { font-family: var(--font-edito); font-size: var(--fs-h-xl); margin: 0 0 18px; }
+.conf-sceau { color: var(--ink); margin: 0 0 18px; }
+.conf-ligne { margin: 0 0 12px; }
+.conf-note { text-align: left; margin: 30px 0; }
+
+/* --- l'ajout rapide depuis la grille */
+.product-card { position: relative; }
+.btn-rapide {
+  position: absolute; right: 12px; bottom: 76px; z-index: 3;
+  width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--rule);
+  background: rgba(255,255,255,.94); cursor: pointer; display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: translateY(6px); transition: opacity .3s ease-in-out, transform .3s ease-in-out, border-color .2s;
+}
+.product-card:hover .btn-rapide, .btn-rapide:focus { opacity: 1; transform: none; }
+.btn-rapide:hover { border-color: var(--ink); }
+
+.ajout-rapide { position: fixed; inset: 0; z-index: 90; display: flex; align-items: flex-end; justify-content: center; }
+.ajout-rapide[hidden] { display: none; }
+.ajout-rapide .voile { position: absolute; inset: 0; background: rgba(0,0,0,.3); opacity: 0; transition: opacity .3s ease-in-out; }
+.ajout-rapide.is-open .voile { opacity: 1; }
+.ar-boite {
+  position: relative; background: #fff; width: 620px; max-width: calc(100% - 32px); margin-bottom: 26px;
+  transform: translateY(30px); opacity: 0; transition: transform .38s cubic-bezier(.2,.7,.2,1), opacity .3s ease-in-out;
+}
+.ajout-rapide.is-open .ar-boite { transform: none; opacity: 1; }
+.ar-tete { display: grid; grid-template-columns: 120px 1fr auto; gap: 22px; align-items: center; padding: 22px 24px; }
+.ar-tete img { width: 120px; height: 120px; object-fit: contain; background: var(--bg-2); }
+.ar-nom { margin: 0 0 8px; font-size: var(--fs-h-s); font-family: var(--font-edito); }
+.ar-prix { margin: 0; font-size: var(--fs-body-l); }
+.ar-fermer { background: none; border: 0; cursor: pointer; font-size: 1.1rem; align-self: flex-start; padding: 0 4px; }
+.ar-tailles { border-top: 1px solid var(--rule); padding: 20px 24px; }
+.ar-tailles p { margin: 0 0 14px; font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
+.ar-liste { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
+.ar-liste .opt { flex: none; min-width: 62px; text-align: center; padding: 13px 10px; }
+.ar-pied { border-top: 1px solid var(--rule); padding: 18px 24px 22px; }
+.ar-pied .btn-panier { width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; }
+.ar-pied .btn-panier svg { flex: none; }
+.ar-lien { display: block; text-align: center; margin-top: 14px; font-size: var(--fs-body-m); }
+.ar-lien span { border-bottom: 1px solid currentColor; }
+
+@media (max-width: 1024px) {
+  .commande-grille { grid-template-columns: 1fr; gap: 34px; }
+  .champs { grid-template-columns: 1fr; }
+  .etapes li { font-size: .5625rem; letter-spacing: .1em; }
+}
+
+/* Le panneau etait trop haut : image plus petite, lignes resserrees,
+   marges reduites. Cible mesuree chez eux : image 341x191, 38 px entre
+   deux liens, panneau d'environ 370 px sous la barre. */
+.menu-panel { padding: 0 0 26px; }
+.menu-panel-inner { grid-template-columns: 300px repeat(3, minmax(0, 1fr)); gap: 0 64px; padding: 30px var(--gutter) 0; }
+.menu-panel-inner--court { grid-template-columns: 300px repeat(2, minmax(0, 1fr)); }
+.menu-edito img { aspect-ratio: 16 / 9; }
+.menu-edito span { font-size: var(--fs-body-s); left: 14px; bottom: 10px; }
+.menu-col h3 { margin: 0 0 18px; }
+.menu-col li { margin-bottom: 10px; }
+.menu-col a { font-size: var(--fs-body-m); }
+
+/* ================================================================
+   La charge de charme : la loupe, la seconde image au survol,
+   la barre d'achat qui suit, les titres qui se posent.
+   ================================================================ */
+
+/* --- la loupe sur la fiche */
+.gal-vue { position: relative; }
+.gal-vue img { cursor: zoom-in; }
+.loupe { position: fixed; inset: 0; z-index: 100; background: #fff; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .3s ease-in-out; }
+.loupe[hidden] { display: none; }
+.loupe.is-open { opacity: 1; }
+.loupe-cadre { position: relative; width: 100%; height: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.loupe img { max-width: 86vw; max-height: 86vh; object-fit: contain; cursor: zoom-in; transition: transform .5s cubic-bezier(.2,.7,.2,1); transform: scale(.98); }
+.loupe.is-open img { transform: scale(1); }
+.loupe.est-zoom img { cursor: zoom-out; transition: transform .12s linear; }
+.loupe-fermer { position: absolute; top: 26px; right: 30px; background: none; border: 0; cursor: pointer; font-size: 1.2rem; z-index: 3; }
+.loupe-nav { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: 0; cursor: pointer; font-size: 1.6rem; color: var(--ink); padding: 14px 20px; z-index: 3; opacity: .5; transition: opacity .2s; }
+.loupe-nav:hover { opacity: 1; }
+.loupe-prec { left: 12px; }
+.loupe-suiv { right: 12px; }
+.loupe-compte { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .16em; color: var(--ink-soft); }
+
+/* --- la seconde monture apparait au survol de la vignette */
+.product-card a { position: relative; }
+.carte-alt {
+  position: absolute; top: 0; left: 0; width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
+  opacity: 0; transition: opacity .55s ease-in-out; pointer-events: none; background: #fff;
+}
+.product-card a:hover .carte-alt { opacity: 1; }
+
+/* --- la barre d'achat qui suit quand la carte est passee */
+.barre-achat {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: rgba(255,255,255,.97);
+  border-top: 1px solid var(--rule); display: flex; align-items: center; gap: 22px;
+  padding: 12px var(--gutter); transform: translateY(100%); transition: transform .4s cubic-bezier(.2,.7,.2,1);
+  backdrop-filter: saturate(140%) blur(6px);
+}
+.barre-achat.est-la { transform: none; }
+.barre-achat img { width: 52px; height: 52px; object-fit: contain; background: #fff; }
+.barre-achat .ba-nom { margin: 0; font-family: var(--font-edito); font-size: var(--fs-h-s); }
+.barre-achat .ba-opts { margin: 2px 0 0; font-size: var(--fs-body-s); color: var(--ink-soft); }
+.barre-achat .ba-espace { flex: 1; }
+.barre-achat .ba-prix { font-size: var(--fs-body-l); }
+.barre-achat .btn-panier { padding: 15px 34px; }
+
+/* --- le titre editorial se pose, un filet se tire dessous */
+.block-text h2, .apparentees h2, .commande-fin h1 { position: relative; display: inline-block; padding-bottom: 14px; }
+.block-text h2::after, .apparentees h2::after {
+  content: ""; position: absolute; left: 50%; bottom: 0; width: 0; height: 1px; background: var(--ink);
+  transform: translateX(-50%); transition: width 1.1s cubic-bezier(.2,.7,.2,1) .2s;
+}
+.apparentees h2::after { left: 0; transform: none; }
+.js-anim.est-la .block-text h2::after, .block-text.est-la h2::after, .apparentees.est-la h2::after { width: 54px; }
+
+/* --- le lien d'action : le trait glisse, la lettre respire */
+.cta { position: relative; border-bottom: 0; padding-bottom: 6px; transition: letter-spacing .4s ease-in-out; }
+.cta::after {
+  content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 1px; background: currentColor;
+  transform-origin: right; transition: transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.cta:hover { letter-spacing: .17em; }
+.cta:hover::after { transform: scaleX(0); transform-origin: left; }
+
+/* --- le hero respire lentement */
+.block-text-on-full-media .hero { animation: souffle 26s ease-in-out infinite alternate; }
+@keyframes souffle { from { transform: scale(1); } to { transform: scale(1.06); } }
+.block-text-on-full-media { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  .block-text-on-full-media .hero { animation: none; }
+  .carte-alt, .cta::after { transition: none; }
+}
+/* dans la loupe aussi, on entre dans le cadre plutot que dans le blanc */
+.loupe img { object-view-box: inset(7%); }
+
+/* Le bas de page de rayon : le texte qui dit ce qu'il y a, et les liens voisins. */
+.grid-seo-text { text-align: center; padding-bottom: 90px; }
+.grid-seo-text p { margin: 0 auto 14px; max-width: 70ch; line-height: 1.75; }
+.seo-liens { font-size: var(--fs-body-m); }
+.seo-liens a { border-bottom: 1px solid var(--rule); padding-bottom: 2px; transition: border-color .3s ease-in-out; }
+.seo-liens a:hover { border-bottom-color: var(--ink); }
+.seo-liens .sep { color: var(--rule); margin: 0 4px; }
+
+/* ================================================================
+   Les pages editoriales : La Maison, le sur-mesure, le guide, le contact.
+   ================================================================ */
+
+.page-edito main > section + section { margin-top: 110px; }
+.page-edito main { padding-bottom: 110px; }
+
+.edito-ouverture { position: relative; overflow: hidden; }
+.edito-ouverture .hero { width: 100%; aspect-ratio: 16 / 7; object-fit: cover; animation: souffle 30s ease-in-out infinite alternate; }
+.edito-ouverture::after { content: ""; position: absolute; inset: 30% 0 0 0; background: linear-gradient(180deg, transparent, rgba(0,0,0,.5)); }
+.edito-ouverture-texte { position: absolute; left: 0; right: 0; bottom: 8%; z-index: 2; text-align: center; color: #fff; padding: 0 var(--gutter); text-shadow: 0 1px 18px rgba(0,0,0,.5); }
+.edito-ouverture-texte .surtitre { color: #fff; opacity: .85; margin: 0 0 14px; }
+.edito-ouverture-texte h1 { font-family: var(--font-edito); font-size: var(--fs-h-xl); margin: 0 0 14px; font-weight: 400; }
+.edito-ligne { margin: 0 auto; max-width: 56ch; font-size: 1rem; }
+
+.edito-intro { max-width: 62ch; margin: 0 auto; padding: 0 var(--gutter); text-align: center; }
+.edito-intro p { font-size: 1.0625rem; line-height: 1.8; margin: 0; }
+.edito-media { padding: 0 var(--gutter); }
+.edito-media img { width: 100%; aspect-ratio: 16 / 7; object-fit: cover; }
+.edito-citation { max-width: 46ch; margin: 0 auto; padding: 0 var(--gutter); text-align: center; }
+.edito-citation blockquote { margin: 0; font-family: var(--font-edito); font-style: italic; font-size: var(--fs-h-l); line-height: 1.45; }
+.edito-deux { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; max-width: 1100px; margin: 0 auto; padding: 0 var(--gutter); }
+.edito-deux h2 { font-family: var(--font-edito); font-size: var(--fs-h-s); margin: 0 0 12px; }
+.edito-deux p { margin: 0 0 18px; }
+.edito-fin { text-align: center; padding: 0 var(--gutter); }
+.edito-fin h2 { font-family: var(--font-edito); font-size: var(--fs-h-l); margin: 0 0 14px; }
+.edito-fin p { margin: 0 0 24px; }
+
+/* La Maison : la chronologie, dont le trait se tire */
+.chrono { max-width: 900px; margin: 0 auto; padding: 0 var(--gutter); }
+.chrono ol { list-style: none; margin: 0; padding: 0; position: relative; }
+.chrono ol::before { content: ""; position: absolute; left: 132px; top: 8px; bottom: 8px; width: 1px; background: var(--rule); }
+.chrono li { position: relative; display: grid; grid-template-columns: 132px 1fr; gap: 46px; padding-bottom: 54px; }
+.chrono li::before { content: ""; position: absolute; left: 128px; top: 9px; width: 7px; height: 7px; border-radius: 50%; background: var(--ink); transform: scale(0); transition: transform .5s cubic-bezier(.2,.7,.2,1) .2s; }
+.chrono li.est-la::before { transform: scale(1); }
+.chrono-annee { font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); padding-top: 2px; text-align: right; }
+.chrono h2 { font-family: var(--font-edito); font-size: var(--fs-h-s); margin: 0 0 10px; }
+.chrono p { margin: 0; }
+
+/* Sur-mesure : les quatre etapes */
+.etapes-sm { max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); }
+.etapes-sm ol { list-style: none; margin: 0; padding: 0; }
+.etapes-sm li { display: grid; grid-template-columns: 74px 1fr 1fr; gap: 40px; align-items: center; padding: 46px 0; border-top: 1px solid var(--rule); }
+.etapes-sm li:first-child { border-top: 0; }
+.sm-num { font-family: var(--font-mono); font-size: var(--fs-h-m); color: var(--rule); line-height: 1; }
+.etapes-sm h2 { font-family: var(--font-edito); font-size: var(--fs-h-s); margin: 0 0 12px; }
+.etapes-sm p { margin: 0 0 16px; }
+.etapes-sm figure { margin: 0; overflow: hidden; }
+.etapes-sm figure img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+.etapes-sm li:hover figure img { transform: scale(1.03); }
+
+/* Contact */
+.contact-cartes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1300px; margin: 0 auto; padding: 0 var(--gutter); }
+.contact-carte { display: block; background: var(--bg-2); padding: 32px 28px 34px; transition: background .3s ease-in-out, transform .3s ease-in-out; }
+.contact-carte:hover { background: #f4f4f4; transform: translateY(-3px); }
+.cc-quoi { display: block; font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 18px; }
+.cc-valeur { display: block; font-family: var(--font-edito); font-size: var(--fs-h-s); margin-bottom: 12px; }
+.cc-note { display: block; font-size: var(--fs-body-m); color: var(--ink-soft); line-height: 1.6; }
+.contact-form { max-width: 640px; margin: 0 auto; padding: 0 var(--gutter); }
+.contact-form h2 { font-family: var(--font-edito); font-size: var(--fs-h-s); margin: 0 0 26px; text-align: center; }
+.contact-form textarea { width: 100%; border: 1px solid var(--rule); background: transparent; font-family: inherit; font-size: var(--fs-body-l); padding: 12px; outline: none; resize: vertical; transition: border-color .3s ease-in-out; }
+.contact-form textarea:focus { border-color: var(--ink); }
+.contact-form .champs { margin-bottom: 26px; }
+
+/* ---------------------------------------------- le guide du diamant */
+.guide-rail { position: sticky; top: var(--header-h, 140px); z-index: 30; background: rgba(255,255,255,.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); display: flex; justify-content: center; gap: 44px; padding: 15px var(--gutter); font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .16em; text-transform: uppercase; margin-top: 0 !important; }
+.guide-rail a { color: var(--ink-soft); padding-bottom: 4px; border-bottom: 1px solid transparent; transition: color .3s, border-color .3s; }
+.guide-rail a:hover, .guide-rail a.est-la { color: var(--ink); border-bottom-color: var(--ink); }
+.page-guide main > section + section { margin-top: 120px; }
+
+.guide-bloc { padding: 0 var(--gutter); }
+.guide-bloc--pose { background: var(--bg-2); padding-top: 90px; padding-bottom: 90px; }
+.guide-tete { max-width: 62ch; margin: 0 auto 54px; text-align: center; }
+.guide-tete h2 { font-family: var(--font-edito); font-size: var(--fs-h-xl); margin: 0 0 18px; font-weight: 400; }
+.guide-tete p { margin: 0; line-height: 1.8; }
+.guide-tete .surtitre { margin-bottom: 12px; }
+
+.taille-scene { display: grid; grid-template-columns: 260px 1fr; gap: 70px; align-items: center; max-width: 1000px; margin: 0 auto; }
+.diamant-trace { width: 100%; color: var(--ink); }
+.diamant-trace path { stroke-dasharray: 420; stroke-dashoffset: 420; }
+.taille-scene.est-la .diamant-trace path { animation: tracer 2.4s cubic-bezier(.4,0,.2,1) forwards; }
+.diamant-trace path:nth-child(2) { animation-delay: .18s; } .diamant-trace path:nth-child(3) { animation-delay: .3s; }
+.diamant-trace path:nth-child(4) { animation-delay: .42s; } .diamant-trace path:nth-child(5) { animation-delay: .54s; }
+.diamant-trace path:nth-child(6) { animation-delay: .66s; } .diamant-trace path:nth-child(7) { animation-delay: .78s; }
+.diamant-trace path:nth-child(8) { animation-delay: .9s; }
+@keyframes tracer { to { stroke-dashoffset: 0; } }
+.echelle-taille { list-style: none; margin: 0; padding: 0; }
+.echelle-taille li { display: grid; grid-template-columns: 130px 1fr; gap: 24px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+.echelle-taille b { font-weight: 500; }
+.echelle-taille span { color: var(--ink-soft); font-size: var(--fs-body-m); }
+
+.couleur-scene, .purete-scene, .carat-scene { max-width: 760px; margin: 0 auto; }
+.couleur-degrade { position: relative; height: 60px; border-radius: 2px; background: linear-gradient(90deg, #ffffff 0%, #fdfdfa 22%, #fbf8ec 45%, #f6efd6 68%, #eee0b4 100%); border: 1px solid var(--rule); }
+.couleur-curseur { position: absolute; top: -7px; bottom: -7px; width: 2px; background: var(--ink); left: 0; transition: left .25s cubic-bezier(.2,.7,.2,1); }
+.glisseur { width: 100%; margin: 22px 0 26px; accent-color: #111; }
+.couleur-lecture { display: flex; align-items: baseline; gap: 26px; }
+.couleur-lecture .lettre { font-family: var(--font-edito); font-size: 3rem; line-height: 1; min-width: 90px; }
+.couleur-lecture .famille { margin: 0 0 6px; font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .16em; text-transform: uppercase; }
+.couleur-lecture .dit { margin: 0; color: var(--ink-soft); }
+.couleur-familles { list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin: 40px 0 0; padding: 0; text-align: center; }
+.couleur-familles b { display: block; font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .12em; margin-bottom: 6px; }
+.couleur-familles span { font-size: var(--fs-body-s); color: var(--ink-soft); }
+
+.pierre-purete { width: 240px; display: block; margin: 0 auto 10px; color: var(--ink); }
+#inclusions circle { opacity: 0; transition: opacity .4s ease-in-out; }
+#inclusions circle.est-la { opacity: .85; }
+
+.carat-cercle-boite { height: 210px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+.carat-cercle { display: block; border-radius: 50%; background: radial-gradient(circle at 38% 32%, #fff 0%, #ededed 45%, #cfcfcf 100%); box-shadow: 0 1px 14px rgba(0,0,0,.12); transition: width .45s cubic-bezier(.2,.7,.2,1), height .45s cubic-bezier(.2,.7,.2,1); }
+.carat-mm { font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .14em; color: var(--ink-soft); }
+.carat-lecture { text-align: center; font-family: var(--font-edito); font-size: var(--fs-h-l); margin: 0 0 10px; }
+.carat-note { text-align: center; color: var(--ink-soft); font-size: var(--fs-body-m); margin: 0; }
+
+.labos { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 900px; margin: 0 auto; padding: 0; }
+.labos li { border-top: 1px solid var(--ink); padding-top: 18px; }
+.labos b { display: block; font-family: var(--font-mono); letter-spacing: .16em; margin-bottom: 10px; }
+.labos span { color: var(--ink-soft); font-size: var(--fs-body-m); line-height: 1.7; }
+
+@media (max-width: 1024px) {
+  .edito-deux, .contact-cartes, .taille-scene, .couleur-familles, .labos { grid-template-columns: 1fr; gap: 34px; }
+  .etapes-sm li { grid-template-columns: 1fr; gap: 20px; }
+  .chrono li { grid-template-columns: 1fr; gap: 8px; }
+  .chrono ol::before, .chrono li::before { display: none; }
+  .chrono-annee { text-align: left; }
+  .guide-rail { gap: 22px; overflow-x: auto; justify-content: flex-start; }
+}
+/* corrections de mesure : la colonne des dates et la citation */
+.chrono ol::before { left: 176px; }
+.chrono li { grid-template-columns: 176px 1fr; }
+.chrono li::before { left: 172px; }
+.chrono-annee { letter-spacing: .1em; white-space: nowrap; overflow: visible; }
+.edito-citation { max-width: 62ch; }
+.edito-citation blockquote { font-size: var(--fs-h-m); line-height: 1.55; }
+.contact-form .btn-panier { width: 100%; }
+.sm-num { color: #cfcfcf; }
+
+/* ================================================================
+   1er septembre 2026 : la version telephone, sur le releve d'Hermes
+   en mobile (marges 16 px, deux colonnes a 16 px, en-tete d'une ligne,
+   texte centre sous l'image, pied de page en sections). Tout est en fin
+   de fichier, rien n'a ete supprime au-dessus.
+   ================================================================ */
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+a, button { -webkit-tap-highlight-color: transparent; }
+button, a { touch-action: manipulation; }
+
+/* Le recadrage d'affichage des carres (62 % de remplissage) etait fait avec
+   object-view-box, que Safari ignore : sur un iPhone le bijou paraissait
+   perdu dans le blanc. Meme resultat partout : on coupe 9 % de chaque bord
+   (clip-path) et on agrandit d'autant (scale 1.22), l'empreinte reste la meme. */
+.block-category img, .tuiles:not(.tuiles--cadeaux) img, .product-card img, .product-card .carte-alt {
+  object-view-box: none; clip-path: inset(9%); transform: scale(1.22); transform-origin: 50% 50%;
+  transition: transform .6s cubic-bezier(.2,.7,.2,1), clip-path .6s cubic-bezier(.2,.7,.2,1);
+}
+.product-card .carte-alt { transition: opacity .55s ease-in-out; }
+.product-card a:hover img, .block-category a:hover img, .tuiles:not(.tuiles--cadeaux) a:hover img { clip-path: inset(11%); transform: scale(1.27); }
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card a:hover img, .block-category a:hover img, .tuiles a:hover img { clip-path: inset(9%); transform: scale(1.22); }
+}
+/* sur un ecran tactile, pas d'etat de survol qui reste colle apres le toucher */
+@media (hover: none) {
+  .product-card a:hover img, .block-category a:hover img, .tuiles:not(.tuiles--cadeaux) a:hover img { clip-path: inset(9%); transform: scale(1.22); }
+  .product-card a:hover .carte-alt { opacity: 0; }
+  .btn-rapide { display: none; }
+  .cta:hover { letter-spacing: .12em; }
+  .cta:hover::after { transform: none; }
+  .grid-chapitre:hover img, .voie:hover img, .tuiles--cadeaux a:hover img { transform: none; }
+}
+
+/* ---------------------------------------------- telephone et tablette */
+@media (max-width: 900px) {
+  :root { --gutter: 16px; --header-h: 72px; }
+  body { font-size: var(--fs-body-l); line-height: 1.55; }
+
+  /* l'en-tete tient sur une ligne : Menu, le logo, Panier. La barre de
+     service disparait, l'emplacement et la langue sont dans le menu et en pied. */
+  .topbar { border-bottom: 0; }
+  .topbar-inner { display: none; }
+  .header-bar { grid-template-columns: 1fr auto 1fr; padding: 15px var(--gutter) 13px; gap: 10px; }
+  .logo { font-size: 1.375rem; letter-spacing: .36em; padding-left: .36em; }
+  .logo small { font-size: .5rem; letter-spacing: .3em; margin-top: 5px; }
+  .menu-burger { font-size: var(--fs-body-s); letter-spacing: .14em; padding: 6px 0; margin-left: -1px; }
+  .header-links { gap: 0; font-size: var(--fs-body-m); }
+  .header-links a { padding: 6px 0; }
+  .js .js-anim { transform: translateY(28px); }
+  .js .js-anim.est-la { transition: transform .6s ease; }
+  .block-text.js-anim.est-la { transition: transform .8s ease; }
+
+  /* les panneaux emplacement / langue arrivent en feuille par le bas */
+  .topbar-panel { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; border-top: 1px solid var(--rule); background: #fff; box-shadow: 0 -10px 40px rgba(0,0,0,.12); animation: feuille .32s cubic-bezier(.2,.7,.2,1); }
+  .topbar-panel-inner { padding: 22px var(--gutter) 30px; }
+  .topbar-panel h3 { margin-bottom: 14px; }
+  .choix-btn { padding: 10px 16px; font-size: var(--fs-body-l); }
+  @keyframes feuille { from { transform: translateY(100%); } to { transform: none; } }
+
+  /* le menu : une colonne, des capitales plus petites, un vrai rythme */
+  .menu-vertical { inset: 0 auto 0 0; width: min(100%, 400px); padding-bottom: 40px; transition: transform .34s cubic-bezier(.2,.7,.2,1); will-change: transform; overscroll-behavior: contain; }
+  .menu-scrim { transition: opacity .34s ease; }
+  .mv-tete { padding: 14px var(--gutter) 10px; }
+  .mv-search input { font-size: var(--fs-body-l); }
+  .menu-close { font-size: 1.05rem; padding: 6px 4px; }
+  .mv-vue { padding: 0 var(--gutter); }
+  .mv-vue ul { margin: 0 0 22px; }
+  .mv-vue li { margin: 0; border-bottom: 1px solid var(--rule); }
+  .mv-vue li:last-child { border-bottom: 0; }
+  .mv-vue a, .mv-vers { padding: 16px 0; font-size: var(--fs-body-l); letter-spacing: .1em; }
+  .mv-racine ul:first-of-type { margin-top: 10px; }
+  .mv-racine ul:nth-of-type(n+2) a { text-transform: none; letter-spacing: 0; font-size: var(--fs-body-l); }
+  .mv-racine ul:nth-of-type(2) { border-top: 1px solid var(--ink); padding-top: 6px; margin-bottom: 0; }
+  .mv-racine ul:nth-of-type(2) li:last-child { border-bottom: 1px solid var(--rule); }
+  .chrono li { grid-template-columns: 1fr; gap: 6px; padding-bottom: 30px; }
+  .chrono ol::before, .chrono li::before { display: none; }
+  .chrono-annee { text-align: left; }
+  .mv-titre { margin: 18px 0 6px; }
+  .btn-retour { margin-top: 12px; padding: 11px 18px; }
+  .mv-pref { gap: 12px; padding-top: 20px; }
+  .mv-pref .topbar-btn { font-size: var(--fs-body-m); }
+  html.menu-ouvert, html.menu-ouvert body { overflow: hidden; }
+
+  /* la home : image d'ouverture en portrait, texte lisible, blocs a 48 px */
+  .page-home main > * + * { margin-top: 48px; }
+  .block-text-on-full-media .hero { aspect-ratio: 4 / 5; }
+  .block-text-on-full-media::after { inset: 25% 0 0 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.55) 100%); }
+  .block-text-on-full-media .overlay { bottom: 8%; padding: 0 var(--gutter); }
+  .block-text-on-full-media h1 { font-size: 1.625rem; line-height: 1.2; margin: 0 0 10px; }
+  .block-text-on-full-media p { font-size: var(--fs-body-l); line-height: 1.5; margin: 0 auto 18px; max-width: 30ch; }
+  .block-category ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 12px; padding: 0 var(--gutter); }
+  .block-category span { margin-top: 10px; font-size: var(--fs-body-m); }
+  .block-text { padding: 0 var(--gutter); }
+  .block-text h2 { font-size: 1.5rem; margin: 0 0 12px; padding-bottom: 10px; }
+  .block-text p { font-size: var(--fs-body-l); margin: 0 0 18px; }
+  .block-text + .block-media { margin-top: 26px; }
+  .block-media { padding: 0 var(--gutter); }
+  .block-media.pair { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .block-media + .block-merchandising { margin-top: 16px; }
+  .block-merchandising { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 12px; padding: 0 var(--gutter); }
+  .product-card .name { margin: 10px 0 2px; font-size: var(--fs-body-m); line-height: 1.35; }
+  .product-card .price { font-size: var(--fs-body-m); color: var(--ink-soft); }
+  .page-home .footer { margin-top: 64px; }
+
+  /* les pages de rayon : le titre, les tuiles, la grille a 12 px */
+  .breadcrumb { padding: 14px var(--gutter) 0; font-size: var(--fs-body-s); }
+  .liste-tete { padding: 14px var(--gutter) 6px; align-items: baseline; }
+  .liste-tete h1 { font-size: 1.5rem; }
+  .liste-tete .count { font-size: var(--fs-body-s); }
+  .surtitre { font-size: var(--fs-body-s); }
+  .btn-filtrer { font-size: var(--fs-body-s); }
+  .liste-intro { padding-top: 6px; }
+  .liste-intro-ligne { padding-top: 2px; font-size: var(--fs-body-m); }
+  .tuiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; margin: 22px 0 8px; }
+  .tuiles span { margin-top: 10px; font-size: var(--fs-body-m); }
+  .tuiles-titre { margin: 26px 0 0; }
+  .filtres { margin-top: 14px; padding: 12px var(--gutter); }
+  .chip { padding: 7px 11px; font-size: var(--fs-body-s); }
+  .grid-results, .grid-results--large { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 12px; padding: 20px var(--gutter) 40px; }
+  .grid-chapitre { margin: 14px 0; }
+  .grid-chapitre img { aspect-ratio: 4 / 5; }
+  .grid-chapitre-texte { left: var(--gutter); bottom: 8%; max-width: calc(100% - 2 * var(--gutter)); }
+  .grid-chapitre-texte .ligne { font-size: 1.25rem; margin-bottom: 12px; }
+  .grid-result-footer { padding: 0 var(--gutter) 40px; }
+  .grid-seo-text { padding: 0 var(--gutter) 50px; }
+  .grid-seo-text p { font-size: var(--fs-body-m); }
+  .liste-ouverture img, .liste-ouverture--nue img { aspect-ratio: 4 / 5; }
+  .liste-ouverture-texte h1 { font-size: 1.5rem; }
+  .liste-ouverture-texte p:not(.surtitre) { font-size: var(--fs-body-l); }
+  .block-seo { padding-bottom: 50px; }
+  .page-liste .block-text { margin: 24px auto 30px; }
+  .chapitre-carte { margin: 24px var(--gutter) 30px; }
+
+  /* la fiche : l'image pleine largeur, la carte d'achat juste dessous */
+  .gal { padding: 0 0 6px; }
+  .gal-vue img, .fiche-haut--carte .gal-vue img { width: 100%; max-width: none; max-height: none; height: auto; aspect-ratio: 1 / 1; object-fit: contain; }
+  .fiche-haut--carte .gal-vue img { object-fit: cover; }
+  .gal-vue .media { height: auto; aspect-ratio: 1 / 1; }
+  .achat { top: auto; position: static; padding: 14px var(--gutter) 10px; border-left: 0; }
+  .achat h1 { font-size: 1.5rem; margin: 0 0 16px; }
+  .achat-ligne { margin: -6px 0 16px; }
+  .variations { margin: 0 0 12px; }
+  .gal-vign, .gal-vign img { width: 42px; height: 42px; }
+  .sel-tete { padding: 15px 0; font-size: var(--fs-body-m); }
+  .opt { padding: 9px 13px; font-size: var(--fs-body-m); }
+  .offrir-opt { padding: 12px 0 2px; }
+  .achat-guide { padding-top: 8px; }
+  .achat-prix { font-size: 1.25rem; margin: 16px 0 14px; }
+  .btn-pay, .btn-panier { padding: 17px 8px; }
+  .btn-panier { font-size: var(--fs-body-s); letter-spacing: .12em; }
+  .achat-note { font-size: var(--fs-body-s); }
+  .fiche-bas { grid-template-columns: 1fr; gap: 18px; padding: 26px var(--gutter) 6px; }
+  .fiche-texte { font-size: var(--fs-body-m); }
+  .acc summary { padding: 15px 0; font-size: var(--fs-body-s); }
+  .apparentees { padding: 44px var(--gutter) 0; }
+  .apparentees h2 { font-size: 1.375rem; margin: 0 0 18px; }
+  .apparentees .grid-results { padding: 0 0 20px; }
+  .fil-bas { flex-wrap: wrap; gap: 8px 10px; padding: 22px var(--gutter) 46px; }
+  .modale-boite { width: 100%; padding: 22px var(--gutter) 40px; }
+  .table-tailles { font-size: var(--fs-body-s); }
+  .loupe-fermer { top: 16px; right: 16px; }
+  .loupe-nav { padding: 12px 10px; }
+
+  /* la barre d'achat qui suit : une ligne, le nom et le prix a gauche, le bouton a droite */
+  .barre-achat { gap: 12px; padding: 10px var(--gutter); padding-bottom: max(10px, env(safe-area-inset-bottom)); }
+  .barre-achat img, .barre-achat .ba-opts { display: none; }
+  .barre-achat .ba-nom { font-size: var(--fs-body-l); font-family: var(--font-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .barre-achat > div { min-width: 0; }
+  .barre-achat .ba-prix { font-size: var(--fs-body-m); white-space: nowrap; }
+  .barre-achat .btn-panier { padding: 14px 18px; white-space: nowrap; flex: none; }
+
+  /* l'ajout rapide et la confirmation du panier, sur toute la largeur */
+  .ar-boite { max-width: 100%; margin-bottom: 0; }
+  .ar-tete { grid-template-columns: 84px 1fr auto; gap: 14px; padding: 16px var(--gutter); }
+  .ar-tete img { width: 84px; height: 84px; }
+  .ar-nom { font-size: 1.125rem; margin-bottom: 4px; }
+  .ar-tailles, .ar-pied { padding-left: var(--gutter); padding-right: var(--gutter); }
+  .ar-pied { padding-bottom: max(18px, env(safe-area-inset-bottom)); }
+
+  /* panier et commande */
+  .page-commande { padding: 0 var(--gutter) 60px; }
+  .retour-boutique { margin: 16px 0 0; }
+  .etapes ol { margin: 18px 0 26px; }
+  .commande-grille { gap: 26px; }
+  .panier { padding: 0 0 10px; }
+  .panier-ligne { grid-template-columns: 76px 1fr auto; gap: 14px; padding: 16px 0; }
+  .panier-ligne img { width: 76px; height: 76px; }
+  .panier-ligne .opts { font-size: var(--fs-body-s); }
+  .panier-total { padding: 18px 0; font-size: var(--fs-body-l); }
+  .panier .btn-panier--plein { margin-top: 14px; }
+  .bloc-service { padding: 20px 18px; margin-bottom: 12px; }
+  .bloc-service--rassure { gap: 14px; }
+  .titre-bloc { margin: 26px 0 16px; }
+  .champs { gap: 16px; }
+  .panier-vide { padding: 40px 0 50px; }
+  .commande-fin { margin-top: 20px; }
+  .commande-fin h1 { font-size: 1.75rem; }
+
+  /* cadeaux : les deux voies l'une sous l'autre */
+  .deux-voies { grid-template-columns: 1fr; gap: 12px; padding: 14px var(--gutter) 0; }
+  .voie img { aspect-ratio: 4 / 3; }
+  .voie-texte { left: var(--gutter); right: var(--gutter); bottom: 8%; }
+  .voie-titre { font-size: 1.5rem; }
+  .voie-ligne { font-size: var(--fs-body-m); margin-bottom: 12px; }
+  .tuiles--cadeaux .t-titre { font-size: 1.125rem; }
+
+  /* pages editoriales et guide */
+  .page-edito main > section + section { margin-top: 56px; }
+  .page-edito main { padding-bottom: 60px; }
+  .edito-ouverture .hero { aspect-ratio: 4 / 5; }
+  .edito-ouverture-texte { bottom: 7%; }
+  .edito-ouverture-texte h1 { font-size: 1.75rem; }
+  .edito-ligne { font-size: var(--fs-body-l); }
+  .edito-intro p { font-size: 1rem; line-height: 1.7; }
+  .edito-media img { aspect-ratio: 4 / 3; }
+  .edito-citation blockquote { font-size: 1.375rem; }
+  .edito-fin h2 { font-size: 1.5rem; }
+  .edito { padding: 10px var(--gutter) 60px; }
+  .edito h1 { font-size: 1.5rem; margin-bottom: 20px; }
+  .chrono li { padding-bottom: 30px; }
+  .etapes-sm li { padding: 26px 0; gap: 14px; }
+  .contact-carte { padding: 22px 18px 24px; }
+  .guide-rail { gap: 20px; padding: 12px var(--gutter); font-size: .625rem; letter-spacing: .12em; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .guide-rail::-webkit-scrollbar { display: none; }
+  .page-guide main > section + section { margin-top: 64px; }
+  .guide-bloc--pose { padding-top: 50px; padding-bottom: 50px; }
+  .guide-tete { margin-bottom: 30px; }
+  .guide-tete h2 { font-size: 1.625rem; }
+  .taille-scene { gap: 26px; }
+  .diamant-trace { max-width: 200px; margin: 0 auto; }
+  .echelle-taille li { grid-template-columns: 96px 1fr; gap: 14px; padding: 12px 0; }
+  .couleur-lecture .lettre { font-size: 2.25rem; min-width: 60px; }
+  .couleur-familles { grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .couleur-familles span { display: none; }
+  .labos { gap: 20px; }
+
+  /* pied de page : deux colonnes serrees, puis des sections filetees */
+  .footer-columns { grid-template-columns: 1fr 1fr; gap: 26px 16px; padding: 34px var(--gutter) 22px; }
+  .footer h3 { font-size: var(--fs-body-s); margin: 0 0 12px; }
+  .footer li { margin-bottom: 9px; font-size: var(--fs-body-m); }
+  .footer-service { grid-template-columns: 1fr; gap: 0; padding: 0 var(--gutter); }
+  .fs-col { border-top: 1px solid var(--rule); padding: 22px 0; }
+  .fs-col p { font-size: var(--fs-body-m); margin-bottom: 8px; }
+  .btn-bordé { padding: 14px 30px; font-size: var(--fs-body-s); }
+  .footer-emplacement { padding: 15px var(--gutter); }
+  .footer-emplacement .topbar-btn { font-size: var(--fs-body-m); }
+  .footer-bottom { padding: 16px var(--gutter) max(16px, env(safe-area-inset-bottom)); font-size: var(--fs-body-s); }
+}
+
+/* les tout petits ecrans */
+@media (max-width: 380px) {
+  .logo { font-size: 1.25rem; }
+  .block-text-on-full-media h1 { font-size: 1.5rem; }
+  .achat-boutons { grid-template-columns: 1fr 1.4fr; }
+}
+
+/* Entre 900 et 1100 px (une fenetre de bureau reduite) la barre de menu
+   passait sur deux lignes et Joaillerie sortait du cadre a gauche. */
+@media (min-width: 901px) and (max-width: 1100px) {
+  :root { --gutter: 28px; }
+  .menu-bar { gap: 18px; font-size: .6875rem; letter-spacing: .06em; white-space: nowrap; padding: 0 var(--gutter); }
+  .menu-bar-link { padding: 6px 0 15px; }
+  .header-links { gap: 20px; font-size: var(--fs-body-m); }
+  .header-search { max-width: 170px; }
+  .logo { font-size: 1.75rem; }
+  .block-category ul { gap: 20px; }
+  .grid-results { gap: 24px 16px; }
+}
+/* sur tablette, l'image d'ouverture en carre plutot qu'en portrait */
+@media (min-width: 600px) and (max-width: 900px) {
+  .block-text-on-full-media .hero, .edito-ouverture .hero, .liste-ouverture img, .liste-ouverture--nue img { aspect-ratio: 1 / 1; }
+  .block-text-on-full-media p { max-width: 42ch; }
+  .menu-vertical { width: 420px; }
+}
+
+/* ================================================================
+   1er septembre, soir : le logo de la marque, les carres egalises,
+   la fin de home, la chronologie.
+   ================================================================ */
+
+/* le logo est l'image de la marque (noir), plus un mot compose */
+.logo { padding-left: 0; letter-spacing: 0; line-height: 0; display: inline-block; }
+.logo-img { display: block; height: 42px; width: auto; margin: 0 auto; }
+.header-bar .logo { justify-self: center; }
+@media (max-width: 900px) { .logo-img { height: 30px; } }
+@media (max-width: 380px) { .logo-img { height: 26px; } }
+@media (min-width: 901px) and (max-width: 1100px) { .logo-img { height: 36px; } }
+
+/* les carres sont desormais egalises a la source (egaliser_carres.py) :
+   plus de recadrage a l'affichage, seulement un leger rapprochement au survol */
+.block-category img, .tuiles:not(.tuiles--cadeaux) img, .product-card img, .product-card .carte-alt { clip-path: none; transform: none; }
+.product-card a:hover img, .block-category a:hover img, .tuiles:not(.tuiles--cadeaux) a:hover img { clip-path: none; transform: scale(1.04); }
+@media (hover: none) { .product-card a:hover img, .block-category a:hover img, .tuiles:not(.tuiles--cadeaux) a:hover img { transform: none; } }
+/* sur la fiche, le bijou est montre plus pres */
+.gal-vue { overflow: hidden; }
+.page-fiche .gal-vue img { clip-path: inset(7%); transform: scale(1.16); }
+.fiche-haut--carte .gal-vue img { clip-path: none; transform: none; }
+.loupe img { object-view-box: none; }
+
+/* la derniere rangee de la home respire avant le pied de page */
+.page-home main { padding-bottom: 110px; }
+@media (max-width: 900px) { .page-home main { padding-bottom: 64px; } .page-home .footer { margin-top: 0; } }
+
+/* la chronologie : l'etiquette ne touche plus le point */
+.chrono-annee { padding-right: 30px; }
+
+/* ================================================================
+   1er septembre, nuit : le guide, la maison, le rendez-vous.
+   Moins de gadgets, des dessins justes, des curseurs dessines.
+   ================================================================ */
+
+/* --- les curseurs : un trait, un point */
+.glisseur { -webkit-appearance: none; appearance: none; width: 100%; height: 22px; background: transparent; margin: 18px 0 22px; cursor: pointer; }
+.glisseur::-webkit-slider-runnable-track { height: 1px; background: var(--ink); }
+.glisseur::-moz-range-track { height: 1px; background: var(--ink); }
+.glisseur::-webkit-slider-thumb { -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%; background: var(--ink); border: 0; margin-top: -6px; transition: transform .25s cubic-bezier(.2,.7,.2,1); }
+.glisseur::-moz-range-thumb { width: 13px; height: 13px; border-radius: 50%; background: var(--ink); border: 0; }
+.glisseur:hover::-webkit-slider-thumb, .glisseur:active::-webkit-slider-thumb { transform: scale(1.35); }
+.glisseur:focus { outline: none; }
+.glisseur:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rgba(0,0,0,.12); }
+
+/* --- la taille : le profil exact, cotes en filigrane, trace lentement */
+.taille-scene { grid-template-columns: 320px 1fr; gap: 80px; max-width: 1060px; }
+.diamant-trace { width: 100%; color: var(--ink); }
+.diamant-trace path { stroke-dasharray: 260; stroke-dashoffset: 260; }
+.diamant-trace .cotes path, .diamant-trace .legende text { opacity: 0; transition: opacity 1s ease 2.2s; }
+.taille-scene.est-la .diamant-trace path { animation: tracer 2.2s cubic-bezier(.4,0,.2,1) forwards; }
+.taille-scene.est-la .diamant-trace .cotes path { opacity: .45; animation: none; stroke-dashoffset: 0; }
+.taille-scene.est-la .diamant-trace .legende text { opacity: .6; }
+.diamant-trace g > path:nth-child(n+2) { animation-delay: .5s; }
+.diamant-trace g > path:nth-child(n+4) { animation-delay: .9s; }
+.diamant-trace g > path:nth-child(n+8) { animation-delay: 1.2s; }
+.diamant-trace g > path:nth-child(n+14) { animation-delay: 1.5s; }
+.echelle-taille li { grid-template-columns: 120px 1fr; padding: 18px 0; }
+.echelle-taille b { font-family: var(--font-edito); font-weight: 400; font-size: 1.125rem; }
+
+/* --- la couleur : la barre est un filet, les lettres sont dessous */
+.couleur-degrade { height: 34px; border-radius: 0; border: 1px solid var(--ink); background: linear-gradient(90deg, #ffffff 0%, #fdfdfa 22%, #fbf8ec 45%, #f6efd6 68%, #eee0b4 100%); }
+.couleur-curseur { top: -8px; bottom: -8px; width: 1px; transition: left .35s cubic-bezier(.2,.7,.2,1); }
+.couleur-lettres { list-style: none; display: flex; justify-content: space-between; margin: 10px 0 0; padding: 0; font-family: var(--font-mono); font-size: .625rem; letter-spacing: 0; color: #b5b5b5; }
+.couleur-lettres li { width: 1em; text-align: center; transition: color .3s; }
+.couleur-lettres li.est-la { color: var(--ink); font-weight: 700; }
+.couleur-scene .glisseur { margin-top: 6px; }
+.couleur-lecture .lettre { font-size: 3.25rem; min-width: 96px; }
+.couleur-familles { margin-top: 36px; }
+
+/* --- la purete : la pierre vue de dessus, les inclusions dedans */
+.pierre-purete { width: 250px; }
+#inclusions circle { transition: opacity .5s ease-in-out, r .5s ease-in-out; }
+
+/* --- le carat : un cercle cote, comme sur un dessin technique */
+.carat-cercle-boite { height: 230px; gap: 18px; }
+.carat-cercle { position: relative; background: none; box-shadow: none; border: 1px solid var(--ink); }
+.carat-cote { position: absolute; left: -2px; right: -2px; top: 50%; height: 1px; background: var(--ink); opacity: .35; }
+.carat-cote::before, .carat-cote::after { content: ""; position: absolute; top: -4px; width: 1px; height: 9px; background: var(--ink); }
+.carat-cote::before { left: 0; } .carat-cote::after { right: 0; }
+.carat-lecture { font-size: var(--fs-h-m); }
+
+/* --- les blocs poses : moins de gris, plus d'air */
+.guide-bloc--pose { background: #fafaf8; }
+.guide-tete h2 { font-size: var(--fs-h-l); }
+
+/* --- la maison : la chronologie posee comme un texte, pas comme un schema */
+.chrono { max-width: 980px; }
+.chrono ol::before { left: 200px; background: var(--rule); }
+.chrono li { grid-template-columns: 200px 1fr; gap: 60px; padding-bottom: 64px; }
+.chrono li::before { left: 196px; top: 12px; width: 9px; height: 9px; }
+.chrono li:last-child { padding-bottom: 10px; }
+.chrono-annee { padding-right: 34px; padding-top: 6px; font-size: var(--fs-body-s); letter-spacing: .18em; }
+.chrono h2 { font-size: var(--fs-h-m); margin: 0 0 14px; line-height: 1.25; }
+.chrono p { max-width: 52ch; line-height: 1.75; font-size: var(--fs-body-l); }
+.edito-intro p { font-family: var(--font-edito); font-size: 1.375rem; line-height: 1.6; }
+.edito-deux { gap: 90px; }
+.edito-deux h2 { font-size: var(--fs-h-m); }
+.edito-citation blockquote { font-size: var(--fs-h-m); line-height: 1.5; }
+.edito-citation { max-width: 52ch; }
+.page-edito main > section + section { margin-top: 130px; }
+.edito-media img { aspect-ratio: 16 / 8; }
+
+/* --- prendre rendez-vous */
+.rdv-voies { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); }
+.rdv-voie .cc-quoi { margin-bottom: 14px; }
+.rdv-voie h2 { font-family: var(--font-edito); font-size: var(--fs-h-s); margin: 0 0 12px; }
+.rdv-voie p { margin: 0 0 16px; line-height: 1.7; color: #333; }
+.rdv-form .surtitre { text-align: center; margin-bottom: 10px; }
+.rdv-form h2 { font-size: var(--fs-h-m); }
+.champs select { -webkit-appearance: none; appearance: none; background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='1.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 2px center; padding-right: 22px; cursor: pointer; }
+.champs input[type="date"] { min-height: 40px; }
+.rdv-cartes { grid-template-columns: repeat(3, 1fr); max-width: 1100px; }
+
+@media (max-width: 1024px) {
+  .rdv-voies { grid-template-columns: 1fr; gap: 36px; }
+  .taille-scene { grid-template-columns: 1fr; gap: 30px; }
+  .diamant-trace { max-width: 300px; margin: 0 auto; }
+  .chrono ol::before { display: none; }
+  .chrono li { grid-template-columns: 1fr; gap: 6px; padding-bottom: 40px; }
+  .chrono-annee { padding-right: 0; text-align: left; }
+}
+@media (max-width: 900px) {
+  .edito-intro p { font-size: 1.125rem; }
+  .chrono h2 { font-size: 1.375rem; }
+  .page-edito main > section + section { margin-top: 64px; }
+  .couleur-lettres { font-size: .5rem; }
+  .couleur-lettres li:nth-child(2n) { visibility: hidden; }
+  .couleur-lettres li.est-la { visibility: visible; }
+  .pierre-purete { width: 210px; }
+  .carat-cercle-boite { height: 200px; }
+  .echelle-taille li { grid-template-columns: 96px 1fr; }
+  .rdv-form h2 { font-size: 1.5rem; }
+}
+@media (max-width: 1024px) { .rdv-cartes { grid-template-columns: 1fr; } }
+@media (min-width: 600px) and (max-width: 1024px) { .rdv-cartes { grid-template-columns: repeat(3, 1fr); } }
+
+/* --- la couleur : une seule regle. Les lettres sont l'instrument, le curseur
+   invisible glisse dessus, les familles sont une reglette dessous. */
+.couleur-scene { max-width: 860px; }
+.regle { position: relative; padding: 26px 0 0; }
+.regle-teinte { height: 6px; border: 1px solid var(--ink); border-bottom: 0; background: linear-gradient(90deg, #ffffff 0%, #fdfdfa 22%, #fbf8ec 45%, #f6efd6 68%, #eee0b4 100%); }
+.couleur-lettres { list-style: none; margin: 0; padding: 12px 0 14px; display: grid; grid-template-columns: repeat(23, 1fr); border-top: 1px solid var(--ink); font-family: var(--font-primary); font-size: var(--fs-body-m); color: #9a9a9a; text-align: center; }
+.couleur-lettres li { transition: color .3s; width: auto; }
+.couleur-lettres li.est-la { color: var(--ink); font-weight: 600; }
+.couleur-curseur { position: absolute; top: 12px; bottom: 0; width: 1px; background: var(--ink); transform: translateX(-.5px); transition: left .3s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
+.couleur-curseur b { position: absolute; top: -26px; left: 50%; transform: translateX(-50%); font-family: var(--font-edito); font-weight: 400; font-size: 1.375rem; line-height: 1; }
+.glisseur--regle { position: absolute; left: 0; right: 0; top: 26px; bottom: 34px; width: 100%; height: auto; margin: 0; opacity: 0; cursor: ew-resize; }
+.regle-familles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 3fr 4fr 3fr 5fr 8fr; border-top: 1px solid var(--rule); }
+.regle-familles li { padding: 9px 0 0; text-align: center; font-size: var(--fs-body-s); color: var(--ink-soft); border-left: 1px solid var(--rule); line-height: 1.3; }
+.regle-familles li:first-child { border-left: 0; }
+.lecture { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; justify-content: center; text-align: center; margin: 34px 0 0; }
+.lecture-code { font-family: var(--font-edito); font-size: 1.5rem; }
+.lecture-code b { font-weight: 400; }
+.lecture-code i { font-style: italic; color: var(--ink-soft); }
+.lecture-dit { color: var(--ink-soft); max-width: 46ch; }
+.purete-scene .glisseur { max-width: 460px; display: block; margin-left: auto; margin-right: auto; }
+.purete-scene .lecture { margin-top: 8px; }
+.pierre-purete { margin-bottom: 24px; }
+/* le profil : cadre large, legende posee a gauche */
+.taille-scene { grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1100px; }
+.diamant-trace .legende text { opacity: 0; }
+.diamant-trace .cotes path { opacity: 0; }
+.diamant-trace path { stroke-dasharray: 140; stroke-dashoffset: 140; }
+.diamant-trace g:first-child > path:nth-child(n+10) { animation-delay: .35s; }
+.diamant-trace g:first-child > path:nth-child(n+25) { animation-delay: .7s; }
+.diamant-trace g:first-child > path:nth-child(n+45) { animation-delay: 1s; }
+@media (max-width: 900px) {
+  .couleur-lettres { font-size: .625rem; padding: 10px 0 12px; }
+  .couleur-lettres li:nth-child(2n) { visibility: visible; }
+  .regle-familles li { font-size: .5625rem; }
+  .regle-familles li:nth-child(2), .regle-familles li:nth-child(3) { font-size: .5rem; }
+  .lecture-code { font-size: 1.25rem; }
+  .lecture { margin-top: 24px; }
+}
+/* retouches : la regle et le profil */
+.regle-teinte { height: 10px; }
+.couleur-curseur { bottom: 34px; }
+.regle-familles li { padding: 8px 4px 0; }
+@media (max-width: 1024px) {
+  .taille-scene { grid-template-columns: 1fr; gap: 34px; }
+  .diamant-trace { max-width: 340px; width: 100%; margin: 0 auto; }
+  .echelle-taille li { grid-template-columns: 110px 1fr; }
+}
+@media (max-width: 900px) {
+  .regle-familles li { font-size: .5625rem; padding: 6px 2px 0; }
+  .regle-familles li:nth-child(2), .regle-familles li:nth-child(3) { font-size: .5625rem; }
+  .couleur-curseur { bottom: 40px; }
+}
+
+/* ================================================================
+   Le passage d'une monture a l'autre sur la fiche : un fondu, pas un saut.
+   Les groupes de la galerie sont empiles dans la meme case ; celui qui part
+   s'efface pendant que celui qui arrive se pose, legerement plus pres.
+   ================================================================ */
+.page-fiche .gal { display: grid; grid-template-columns: minmax(0, 1fr); place-items: start center; }
+.page-fiche .gal-groupe { grid-area: 1 / 1; width: 100%; transition: opacity .75s cubic-bezier(.2,.7,.2,1), visibility 0s linear 0s; }
+.page-fiche .gal .gal-groupe[hidden] {
+  display: grid !important; opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .55s cubic-bezier(.4,0,.6,1), visibility 0s linear .55s;
+}
+.page-fiche .gal-vue img { transition: transform .9s cubic-bezier(.2,.7,.2,1), clip-path .9s cubic-bezier(.2,.7,.2,1); }
+.page-fiche .gal .gal-groupe[hidden] .gal-vue img { transform: scale(1.2); clip-path: inset(8.5%); }
+.page-fiche .gal-vue { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  .page-fiche .gal-groupe, .page-fiche .gal .gal-groupe[hidden], .page-fiche .gal-vue img { transition: none; }
+}
+
+/* la pastille de variante : l'anneau se pose en douceur */
+.gal-vign img { transition: border-color .4s ease, box-shadow .4s ease, transform .4s cubic-bezier(.2,.7,.2,1); }
+.gal-vign.is-on img { transform: scale(1.06); }
+.gal-vign:active img { transform: scale(.96); }
+
+/* la valeur choisie dans le selecteur s'ecrit, ne saute pas */
+.sel-val.vif { animation: ecrire .5s cubic-bezier(.2,.7,.2,1); }
+@keyframes ecrire { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.sel-val { display: inline-block; }
+/* l'image de fiche, 30 % plus petite sur bureau (Raouf, 1er sept.) */
+.page-fiche .gal-vue img { clip-path: none; transform: scale(.82); }
+.page-fiche .gal .gal-groupe[hidden] .gal-vue img { clip-path: none; transform: scale(.86); }
+@media (max-width: 900px) {
+  .page-fiche .gal-vue img { transform: scale(.94); }
+  .page-fiche .gal .gal-groupe[hidden] .gal-vue img { transform: scale(.98); }
+}
+
+/* ================================================================
+   1er septembre, tard : les photos portees, les chapitres non recadres,
+   l'en-tete telephone qui respire, la maison sur telephone, la 404.
+   ================================================================ */
+/* la tuile "Toute la collection" est une photo portee, pas un packshot */
+.block-category .tuile-photo { object-fit: cover; }
+/* les chapitres dans la grille montrent l'image entiere */
+.grid-chapitre img, .chapitre-carte img { aspect-ratio: auto; height: auto; }
+/* un portrait seul, pose au centre comme dans une revue */
+.block-media--portrait img { max-width: 640px; margin: 0 auto; }
+/* la home : la rangee de pieces n'ecrase plus les tuiles */
+.page-home .block-merchandising { max-width: 1280px; }
+/* la fiche : la photo portee sous le packshot */
+.gal-groupe { display: grid; gap: 12px; }
+.page-fiche .gal-vue--porte img { aspect-ratio: 4 / 5; object-fit: cover; transform: none; clip-path: none; cursor: default; }
+.page-fiche .gal .gal-groupe[hidden] .gal-vue--porte img { transform: none; }
+/* la 404 */
+.page-404 .edito-ouverture .hero { aspect-ratio: 16 / 8; object-position: 50% 40%; }
+.page-404 .edito-fin { padding-bottom: 40px; }
+.page-404 .edito-fin p { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 34px; }
+@media (max-width: 900px) {
+  /* l'en-tete respire : logo plus petit, plus d'air autour */
+  .header-bar { padding: 19px var(--gutter) 17px; }
+  .logo-img { height: 26px; }
+  .menu-burger { letter-spacing: .18em; }
+  :root { --header-h: 74px; }
+  /* la maison sur telephone : moins de masse */
+  .page-edito .edito-intro p { font-size: 1.0625rem; line-height: 1.6; }
+  .chrono h2 { font-size: 1.25rem; margin-bottom: 8px; }
+  .chrono p { font-size: var(--fs-body-m); line-height: 1.6; }
+  .chrono li { padding-bottom: 30px; }
+  .chrono-annee { margin-bottom: 2px; }
+  .block-media--portrait { padding: 0 var(--gutter); }
+  .page-404 .edito-ouverture .hero { aspect-ratio: 4 / 5; }
+  .gal-groupe { gap: 6px; }
+}
+/* les textes juridiques */
+.edito--legal h2 { font-family: var(--font-edito); font-style: normal; font-size: var(--fs-h-s); margin: 40px 0 10px; }
+.edito--legal p, .edito--legal li { font-size: var(--fs-body-m); line-height: 1.7; color: #333; }
+.edito--legal ul { padding-left: 18px; margin: 0 0 14px; }
+.edito--legal .a-confirmer { background: #fff6d6; color: #6b5300; padding: 0 4px; font-style: normal; }
+.edito--legal .note-legale { border-top: 1px solid var(--rule); padding-top: 16px; margin-top: 40px; color: var(--ink-soft); }
+
+/* ================================================================
+   2 septembre, 0 h : les images editoriales sont plus petites sur bureau,
+   et jamais recadrees (sauf les deux images d'ouverture qui portent un titre).
+   ================================================================ */
+.block-media, .edito-media, .chapitre-carte, .liste-ouverture { max-width: 1080px; margin-left: auto; margin-right: auto; }
+.block-media.pair { max-width: 1080px; }
+.block-media--portrait img { max-width: 480px; }
+.liste-ouverture img, .liste-ouverture--nue img, .edito-media img, .block-media img { aspect-ratio: auto; height: auto; object-fit: initial; }
+.grid-chapitre { width: 100%; max-width: 1080px; margin-left: auto; margin-right: auto; }
+.chapitre-carte { display: block; }
+@media (max-width: 900px) {
+  .block-media, .edito-media, .chapitre-carte, .liste-ouverture, .grid-chapitre { max-width: none; }
+}
+/* la home garde ses grandes images, pleine largeur comme avant (Raouf, 2 sept.) */
+.page-home .block-media, .page-home .block-media.pair { max-width: 1700px; }
+/* 2 sept. : la lecture sur une ligne, en italique serif ; la pierre du carat redevient une pierre */
+.lecture { flex-wrap: nowrap; gap: 0 22px; }
+.lecture-dit { max-width: none; font-family: var(--font-edito); font-style: italic; font-size: 1.25rem; color: var(--ink); }
+.carat-cercle { border: 0; background: radial-gradient(circle at 38% 32%, #fff 0%, #ededed 45%, #cfcfcf 100%); box-shadow: 0 1px 14px rgba(0,0,0,.12); }
+.carat-cote { display: none; }
+@media (max-width: 900px) { .lecture { flex-wrap: wrap; } .lecture-dit { font-size: 1.125rem; } }
+
+/* ================================================================
+   2 septembre : les petits eblouissements. Les titres s'ecrivent,
+   une etincelle a Celebrations, un reflet passe sur les bijoux,
+   le menu se deroule, le compteur du panier bat.
+   ================================================================ */
+.ecrit .mot { display: inline-block; opacity: 0; transform: translateY(.45em); filter: blur(2px); }
+.ecrit.est-la .mot { animation: mot-arrive .9s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(var(--i) * 90ms); }
+@keyframes mot-arrive { to { opacity: 1; transform: none; filter: blur(0); } }
+.ecrit .mot + .mot { margin-left: .28em; }
+
+/* l'etincelle : une etoile a quatre branches, fine, qui scintille sans insister */
+.fete { position: relative; display: inline-block; }
+.etincelle { position: absolute; width: .42em; height: .42em; top: -.12em; right: -.5em; background: currentColor;
+  clip-path: polygon(50% 0, 57% 43%, 100% 50%, 57% 57%, 50% 100%, 43% 57%, 0 50%, 43% 43%);
+  transform: scale(0); animation: scintille 4.2s ease-in-out infinite; animation-delay: 1.2s; pointer-events: none; }
+.etincelle--2 { width: .24em; height: .24em; top: .18em; right: -.86em; animation-delay: 2.6s; animation-duration: 5s; }
+.etincelle--3 { width: .2em; height: .2em; top: -.42em; right: -.12em; animation-delay: 3.4s; animation-duration: 6.2s; }
+@keyframes scintille { 0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; } 6% { transform: scale(1) rotate(18deg); opacity: 1; } 12% { transform: scale(.35) rotate(28deg); opacity: .8; } 17% { transform: scale(0) rotate(40deg); opacity: 0; } }
+
+/* un reflet passe sur le bijou au survol */
+@media (hover: hover) {
+  .product-card a::before, .block-category a::before, .tuiles a::before {
+    content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: linear-gradient(110deg, transparent 38%, rgba(214,190,140,.22) 50%, transparent 62%);
+    transform: translateX(-130%);
+  }
+  .product-card a:hover::before, .block-category a:hover::before, .tuiles a:hover::before { transform: translateX(130%); transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+  .block-category a, .tuiles a { position: relative; }
+}
+
+/* le menu se deroule ligne par ligne */
+.menu-parent:hover .menu-col li, .menu-parent:focus-within .menu-col li { animation: mot-arrive .55s cubic-bezier(.2,.7,.2,1) both; opacity: 0; transform: translateY(6px); }
+.menu-col li:nth-child(1) { animation-delay: .04s; } .menu-col li:nth-child(2) { animation-delay: .08s; } .menu-col li:nth-child(3) { animation-delay: .12s; }
+.menu-col li:nth-child(4) { animation-delay: .16s; } .menu-col li:nth-child(5) { animation-delay: .20s; } .menu-col li:nth-child(6) { animation-delay: .24s; }
+.menu-col li:nth-child(7) { animation-delay: .28s; } .menu-col li:nth-child(8) { animation-delay: .32s; }
+.menu-vertical.is-open .mv-vue:not([hidden]) li { animation: mot-arrive .5s cubic-bezier(.2,.7,.2,1) both; opacity: 0; transform: translateY(8px); }
+.mv-vue li:nth-child(1) { animation-delay: .10s; } .mv-vue li:nth-child(2) { animation-delay: .15s; } .mv-vue li:nth-child(3) { animation-delay: .20s; }
+.mv-vue li:nth-child(4) { animation-delay: .25s; } .mv-vue li:nth-child(5) { animation-delay: .30s; } .mv-vue li:nth-child(6) { animation-delay: .35s; }
+.mv-vue li:nth-child(7) { animation-delay: .40s; } .mv-vue li:nth-child(8) { animation-delay: .45s; }
+
+/* le compteur du panier bat quand une piece arrive */
+.panier-compte.pop { display: inline-block; animation: bat .55s cubic-bezier(.2,.7,.2,1); }
+@keyframes bat { 0% { transform: scale(1); } 35% { transform: scale(1.5); } 100% { transform: scale(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ecrit .mot { opacity: 1; transform: none; filter: none; animation: none !important; }
+  .etincelle { display: none; }
+  .product-card a::before, .block-category a::before, .tuiles a::before { display: none; }
+  .menu-col li, .mv-vue li { animation: none !important; opacity: 1; transform: none; }
+}
+/* 2 sept. 1 h : plus de fondu entre les montures ; etoiles plus grandes, plus discretes, et ailleurs */
+.page-fiche .gal-groupe, .page-fiche .gal .gal-groupe[hidden], .page-fiche .gal-vue img { transition: none; }
+.page-fiche .gal .gal-groupe[hidden] .gal-vue img { transform: scale(.82); }
+.etincelle { width: .63em; height: .63em; top: -.2em; right: -.72em; opacity: .85; animation-duration: 6.5s; animation-delay: 1.6s; }
+.etincelle--2 { width: .36em; height: .36em; top: .22em; right: -1.2em; animation-delay: 3.8s; animation-duration: 7.5s; }
+.etincelle--3 { width: .3em; height: .3em; top: -.6em; right: -.18em; animation-delay: 5.2s; animation-duration: 8.4s; }
+@keyframes scintille { 0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; } 4% { transform: scale(1) rotate(16deg); opacity: .85; } 8% { transform: scale(.3) rotate(26deg); opacity: .6; } 12% { transform: scale(0) rotate(40deg); opacity: 0; } }
+/* dans l'achat : le bouton qui vient d'accepter la piece, le total du panier */
+.btn-panier.is-ok { position: relative; overflow: visible; }
+.btn-panier.is-ok::before, .btn-panier.is-ok::after { content: ""; position: absolute; background: #fff; clip-path: polygon(50% 0, 57% 43%, 100% 50%, 57% 57%, 50% 100%, 43% 57%, 0 50%, 43% 43%); pointer-events: none; }
+.btn-panier.is-ok::before { width: 12px; height: 12px; top: 6px; right: 10px; animation: scintille 2.4s ease-in-out 1; }
+.btn-panier.is-ok::after { width: 7px; height: 7px; bottom: 7px; right: 26px; animation: scintille 2.4s ease-in-out .5s 1; }
+.panier-total .fete .etincelle { color: var(--ink); }
+.panier-total .etincelle--3 { top: -.5em; right: -.3em; }
+.panier-total .etincelle--2 { top: .1em; right: -.9em; }
+.ba-prix .etincelle { display: none; }
+/* 2 sept. : aucun effet au changement de monture. Retour a l'etat d'avant, simple bascule. */
+.page-fiche .gal { display: flex; }
+.page-fiche .gal-groupe { grid-area: auto; transition: none; }
+.page-fiche .gal .gal-groupe[hidden] { display: none !important; }
+.gal-vign img { transition: none; }
+.gal-vign.is-on img, .gal-vign:active img { transform: none; }
+.sel-val.vif { animation: none; }
+/* 2 sept. : plus de seconde monture qui apparait au survol des vignettes non plus */
+.product-card .carte-alt { display: none !important; }
+.product-card a:hover .carte-alt { opacity: 0; }
+/* 2 sept. : le reflet champagne au survol des bijoux est retire aussi */
+.product-card a::before, .block-category a::before, .tuiles a::before { display: none !important; content: none; }
+
+/* ================================================================
+   2 sept. 1 h 20 : tout en noir sur iPhone (Safari colorait les boutons
+   en bleu), et le texte cadre partout : mesure, hierarchie, respiration.
+   ================================================================ */
+button, input, select, textarea { color: inherit; -webkit-appearance: none; appearance: none; border-radius: 0; }
+input[type="checkbox"] { -webkit-appearance: checkbox; appearance: checkbox; }
+input[type="range"].glisseur { -webkit-appearance: none; }
+.btn-pay { color: var(--ink); }
+.menu-burger, .lien-guide, .lien-guide span, .btn-retour, .menu-close, .topbar-btn, .btn-voir-plus, .btn-filtrer { color: var(--ink); }
+a, a:visited { color: inherit; }
+
+/* la mesure : une ligne de texte ne depasse pas ~64 caracteres, l'oeil ne se perd pas */
+h1, h2, h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+.edito p, .fiche-texte p, .acc-corps p, .block-text p, .guide-tete p, .liste-intro p, .liste-intro-ligne, .grid-seo-text p,
+.bloc-service p, .edito-intro p, .edito-deux p, .chrono p, .rdv-voie p, .cc-note, .etapes-sm p, .edito-fin p, .block-seo p { max-width: 64ch; }
+.block-text p, .guide-tete p, .liste-intro p, .edito-intro p, .edito-fin p, .grid-seo-text p, .block-seo p, .edito-ligne { margin-left: auto; margin-right: auto; }
+body { color: #1c1c1c; }
+p { line-height: 1.7; }
+
+/* la fiche : une phrase de tete en serif, le reste plus bas et plus calme, les references en petit */
+.fiche-texte { font-size: var(--fs-body-m); line-height: 1.7; color: #333; }
+.fiche-texte p:first-child { font-family: var(--font-edito); font-size: 1.1875rem; line-height: 1.5; color: var(--ink); margin: 0 0 16px; max-width: 34ch; }
+.fiche-texte p { margin: 0 0 12px; }
+.fiche-texte .ref { font-size: var(--fs-body-s); color: var(--ink-soft); margin: 0 0 6px; letter-spacing: .01em; }
+.fiche-texte .ref:first-of-type { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--rule); }
+.fiche-texte .ref a, .lien-pierre a { border-bottom-color: var(--rule); color: var(--ink); }
+.fiche-texte .ref a:hover, .lien-pierre a:hover { border-bottom-color: var(--ink); }
+
+/* "Dans le detail" : un tableau a deux colonnes, l'etiquette a gauche, la valeur alignee */
+.attributs { margin: 0 0 8px; }
+.attributs li { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 0 16px; margin: 0; padding: 9px 0; border-bottom: 1px solid var(--rule); font-size: var(--fs-body-m); line-height: 1.55; }
+.attributs li:last-child { border-bottom: 0; }
+.attributs span { color: var(--ink-soft); font-size: var(--fs-body-s); letter-spacing: .02em; padding-top: 2px; }
+.acc-corps { font-size: var(--fs-body-m); line-height: 1.7; color: #333; }
+.acc-corps p { margin: 0 0 10px; }
+.note-specs { font-size: var(--fs-body-s); color: #9a9a9a; margin: 12px 0 0; }
+.acc-sous { color: var(--ink); font-size: var(--fs-body-m); }
+.acc-liste li { font-size: var(--fs-body-m); }
+.acc summary { color: var(--ink); }
+
+/* les paragraphes centres restent courts et equilibres */
+.block-text p { max-width: 46ch; }
+.edito-ligne { max-width: 44ch; }
+.guide-tete p { max-width: 58ch; }
+
+@media (max-width: 900px) {
+  .fiche-texte p:first-child { font-size: 1.0625rem; max-width: none; }
+  .attributs li { grid-template-columns: 108px minmax(0, 1fr); gap: 0 12px; }
+  .fiche-bas { gap: 30px; }
+  .block-text p { max-width: 34ch; }
+}
+
+/* 2 sept. 1 h 40 : le carat a l'echelle d'une piece de 1 euro ; la purete en pierre facettee ;
+   la fiche : une ligne de dessin en tete, le reste en petit */
+.carat-scene-ligne { display: flex; justify-content: center; align-items: flex-end; gap: 56px; margin-bottom: 10px; }
+.carat-cercle-boite { height: auto; min-height: 0; gap: 14px; }
+.carat-ref { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.carat-piece { display: block; width: 170px; height: 170px; border-radius: 50%; border: 1px solid #c9c9c9; background: radial-gradient(circle at 40% 35%, #fbfaf6, #e6e2d8 70%, #d3cec2); box-shadow: inset 0 0 0 10px rgba(255,255,255,.35); }
+.carat-scene .carat-cercle-boite .carat-cercle { border: 0; }
+.carat-scene .carat-mm { white-space: nowrap; }
+@media (max-width: 900px) { .carat-scene-ligne { gap: 32px; } .carat-piece { width: 120px; height: 120px; box-shadow: inset 0 0 0 7px rgba(255,255,255,.35); } }
+
+.pierre-purete { width: 300px; margin: 0 auto 26px; }
+#inclusions > * { opacity: 0; transition: opacity .6s ease-in-out; }
+#inclusions > *.est-la { opacity: 1; }
+#inclusions .cristal { fill: #6b6b6b; }
+#inclusions .plume { fill: none; stroke: #7a7a7a; stroke-width: .55; stroke-linecap: round; }
+#inclusions .nuage { fill: #8a8a8a; filter: url(#flou); opacity: 0; }
+#inclusions .nuage.est-la { opacity: .28; }
+.loupe-cercle { opacity: .5; }
+@media (max-width: 900px) { .pierre-purete { width: 240px; } }
+
+.fiche-texte .fiche-ligne { font-family: var(--font-edito); font-size: 1.25rem; line-height: 1.4; color: var(--ink); margin: 0 0 14px; max-width: 30ch; }
+.fiche-texte p:first-child { font-family: inherit; font-size: inherit; line-height: inherit; color: inherit; max-width: 64ch; }
+.fiche-texte p { font-size: var(--fs-body-m); color: #444; margin: 0 0 10px; }
+.fiche-texte .fiche-ligne + p { color: #444; }
+@media (max-width: 900px) { .fiche-texte .fiche-ligne { font-size: 1.125rem; max-width: none; } .fiche-texte p { font-size: var(--fs-body-m); } }
+
+
+/* ================================================================
+   4 octobre 2026 : guide du diamant sur de vraies photos
+   (profil et dessus generes, piece de 1 euro reelle, echelle reglable)
+   ================================================================ */
+.taille-photo { margin: 0; padding: 38px 0 34px 118px; }
+.taille-photo-cadre { position: relative; }
+.taille-photo img { display: block; width: 100%; height: auto; }
+.cote { position: absolute; border: 0 solid var(--ink); opacity: 0; transition: opacity 1s ease .5s; }
+.taille-scene.est-la .cote { opacity: 1; }
+.cote i { position: absolute; font-style: normal; font-family: var(--font-mono); font-size: .625rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); white-space: nowrap; }
+.cote-table { left: 19%; width: 62%; top: -18px; height: 7px; border-width: 1px 1px 0 1px; }
+.cote-table i { left: 50%; bottom: 12px; transform: translateX(-50%); }
+.cote-couronne, .cote-pavillon, .cote-rondiste { left: -22px; width: 7px; border-width: 1px 0 1px 1px; }
+.cote-couronne { top: 0; height: 22%; }
+.cote-rondiste { top: 22.6%; height: 2.6%; border-width: 0 0 0 1px; }
+.cote-pavillon { top: 26%; height: 74%; }
+.cote-couronne i, .cote-pavillon i, .cote-rondiste i { right: 18px; top: 50%; transform: translateY(-50%); }
+.cote-colette { left: 50%; bottom: -8px; width: 0; height: 0; }
+.cote-colette i { left: 0; top: 0; transform: translateX(-50%); }
+
+.couleur-pierre { position: relative; width: 230px; margin: 0 auto 44px; }
+.couleur-pierre img { display: block; width: 100%; height: auto; }
+.couleur-teinte { position: absolute; inset: 0; border-radius: 50%; background: #e9cc6a; mix-blend-mode: multiply; opacity: 0; transition: opacity .45s ease; pointer-events: none; }
+.couleur-scene .regle-teinte, .couleur-scene .couleur-curseur { display: none; }
+.couleur-scene .regle { padding-top: 0; }
+.couleur-lettres li { transition: color .25s ease, transform .25s ease; }
+.couleur-lettres li.est-la { color: var(--ink); font-family: var(--font-edito); font-weight: 400; transform: scale(1.9); }
+
+.pierre-purete { width: 320px; }
+#inclusions .cristal { fill: #161616; }
+#inclusions .plume { stroke: #222; stroke-width: .6; }
+#inclusions .nuage { fill: #4a4a4a; }
+#inclusions .nuage.est-la { opacity: .34; }
+
+.carat-scene-ligne { align-items: flex-end; min-height: 250px; }
+.carat-scene .carat-cercle-boite .carat-cercle, .carat-cercle { background: url("images/guide/diamant-dessus.webp") center / contain no-repeat; border: 0; border-radius: 0; box-shadow: none; }
+.carat-piece { background: url("images/guide/euro-1.webp") center / contain no-repeat; border: 0; border-radius: 0; box-shadow: none; width: 110px; height: 110px; flex: none; }
+.carat-reglage { text-align: center; margin: 6px 0 26px; }
+.lien-reglage { font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .12em; text-transform: uppercase; background: none; border: 0; border-bottom: 1px solid currentColor; padding: 0 0 3px; cursor: pointer; }
+.carat-reglage-corps { max-width: 460px; margin: 18px auto 0; }
+.carat-reglage-corps p { color: var(--ink-soft); font-size: var(--fs-body-m); margin: 0 0 6px; }
+@media (max-width: 900px) {
+  .taille-photo { padding: 34px 0 30px 96px; max-width: 420px; margin: 0 auto; }
+  .cote i { font-size: .5625rem; letter-spacing: .12em; }
+  .couleur-pierre { width: 180px; margin-bottom: 36px; }
+  .couleur-lettres li.est-la { transform: scale(1.7); }
+  .pierre-purete { width: 260px; }
+  .carat-scene-ligne { min-height: 230px; }
+  .carat-piece { width: 150px; height: 150px; }
+}
+#couleur-lettre { display: none; }
+#inclusions .cristal { stroke: #fff; stroke-width: .45; paint-order: stroke; }
+#inclusions .plume { stroke-width: .9; }
+#inclusions .nuage { fill: #6f6f6f; }
+#inclusions .nuage.est-la { opacity: .46; }
+.couleur-pierre .couche { position: absolute; inset: 0; opacity: 0; transition: opacity .45s ease; }
+.pierre-purete .couche { opacity: 0; transition: opacity .6s ease; }
+
+/* --- 4 octobre, 17 h : le curseur de couleur se voit et se cale sur les lettres ; curseurs plus gros au doigt */
+.couleur-scene .regle { display: flex; flex-direction: column; }
+.couleur-scene .couleur-lettres { border-top: 0; padding-top: 14px; }
+.couleur-scene .couleur-lettres li { cursor: pointer; padding: 4px 0; }
+.couleur-scene .glisseur--regle { order: -1; position: relative; inset: auto; display: block; opacity: 1; height: 30px; cursor: grab;
+  --pouce: 18px; width: calc(100% * 22 / 23 + var(--pouce)); margin: 0 0 0 calc(100% / 46 - var(--pouce) / 2); }
+.couleur-scene .glisseur--regle:active { cursor: grabbing; }
+.glisseur--regle::-webkit-slider-thumb { width: 18px; height: 18px; margin-top: -8.5px; box-shadow: 0 0 0 6px rgba(17,17,17,.07); }
+.glisseur--regle::-moz-range-thumb { width: 18px; height: 18px; box-shadow: 0 0 0 6px rgba(17,17,17,.07); }
+.glisseur { touch-action: pan-y; }
+@media (pointer: coarse) {
+  .glisseur { height: 44px; margin-top: 8px; margin-bottom: 12px; }
+  .glisseur::-webkit-slider-thumb { width: 24px; height: 24px; margin-top: -11.5px; }
+  .glisseur::-moz-range-thumb { width: 24px; height: 24px; }
+  .couleur-scene .glisseur--regle { --pouce: 24px; height: 44px; margin-top: 0; margin-bottom: 0; }
+  .glisseur--regle::-webkit-slider-thumb { width: 24px; height: 24px; margin-top: -11.5px; }
+  .couleur-scene .couleur-lettres li { padding: 8px 0; }
+}
+
+.paiement-note { color: var(--ink-soft); font-size: var(--fs-body-m); max-width: 52ch; margin: 0 0 22px; }
+#btn-payer[disabled] { opacity: .55; cursor: progress; }
+
+/* ================================================================
+   4 octobre 2026, soir : corrections mesurees sur telephone.
+   Zones de toucher, plus petits textes, contraste. Rien ne bouge sur grand ecran.
+   ================================================================ */
+.couleur-lettres { color: #6c6c6c; }                 /* 2,7:1 -> 5:1 sur le fond #fafaf8 */
+.note-specs { color: #767676; }
+@media (max-width: 900px) {
+  /* le lien garde sa taille a l'oeil ; sa zone sensible grandit (marge negative = meme mise en page) */
+  .menu-burger, .header-bar .logo, .lien-panier { padding-block: 9px; margin-block: -9px; }
+  .menu-close { padding: 5px 12px; margin: -5px -12px; }
+  .mv-search input { min-height: 44px; }
+  .mv-pref .topbar-btn, .footer-emplacement .topbar-btn { padding-block: 13px; margin-block: -13px; }
+  .fil-bas a { padding-block: 12px; margin-block: -12px; }
+  .breadcrumb a { padding-block: 15px; }
+  .footer-columns li { margin: 0; }
+  .footer-columns li a { display: inline-block; padding-block: 8px; }
+  .champs input, .champs select { min-height: 44px; }
+  /* liens soulignes ou filetes : la zone sensible passe par un calque, le trait ne bouge pas */
+  .cta, .guide-rail a, .btn-filtrer, .lien-reglage, .retour-boutique, .lien-souligne, .socials a, .lien-guide, .fs-col p a, .acc-liste a, .fiche-texte .ref a, .seo-liens a, .acc-corps p a { position: relative; }
+  .cta::before, .guide-rail a::before, .btn-filtrer::before, .lien-reglage::before, .retour-boutique::before, .lien-souligne::before, .socials a::before, .lien-guide::before, .fs-col p a::before, .acc-liste a::before, .fiche-texte .ref a::before, .seo-liens a::before, .acc-corps p a::before { content: ""; position: absolute; left: -8px; right: -8px; top: 50%; height: 44px; transform: translateY(-50%); }
+  /* plus rien sous 11 px */
+  .regle-familles li, .regle-familles li:nth-child(2), .regle-familles li:nth-child(3) { font-size: .6875rem; }
+  .couleur-lettres { font-size: .6875rem; }
+  .guide-rail a { font-size: .6875rem; }
+  .etapes .et-nom { font-size: .6875rem; }
+  .carat-mm { font-size: .6875rem; }
+  .cote i { font-size: .6875rem; letter-spacing: .1em; }
+}
+
+.formulaire-retractation { border: 1px solid var(--rule); padding: 22px 24px; margin: 22px 0; max-width: 64ch; }
+.formulaire-retractation p { margin: 0 0 10px; }
+.formulaire-retractation .fr-titre { font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 14px; }
+.fiche-collection { font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); margin: 16px 0 0; }
+@media (max-width: 900px) { .fiche-collection { font-size: .6875rem; } }
+/* les promesses de la maison, sous les boutons d'achat */
+.achat-rassure { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 18px; margin: 14px 0 0; font-size: var(--fs-body-s); color: var(--ink-soft); }
+.achat-rassure span { white-space: nowrap; }
+@media (max-width: 900px) { .achat-rassure { font-size: .6875rem; gap: 2px 14px; } }
+
+/* ================================================================
+   4 octobre 2026, nuit : la fiche produit.
+   A gauche la piece, grande, qui reste a l'ecran ; a droite on lit de haut en bas :
+   nom et prix, la phrase de la piece, la collection, les choix, les boutons, les volets.
+   ================================================================ */
+.page-fiche .fiche-haut { grid-template-columns: minmax(0, 1fr) 480px; }
+.page-fiche .gal { position: sticky; top: 96px; height: calc(100vh - 96px); min-height: 520px; padding: 0 var(--gutter); display: grid; place-items: center; align-content: center; }
+.page-fiche .gal-vue img, .page-fiche .fiche-haut--carte .gal-vue img { max-height: 80vh; max-width: 780px; width: 100%; }
+.page-fiche .gal-vue img { transform: scale(.92); }
+.page-fiche .gal .gal-groupe[hidden] .gal-vue img { transform: scale(.96); }
+.page-fiche .achat { position: static; padding: 54px 48px 80px 44px; min-height: calc(100vh - 96px); }
+.achat-tete { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
+.achat-tete h1 { margin: 0; }
+.achat-tete .achat-prix { margin: 0; text-align: right; white-space: nowrap; font-size: var(--fs-h-s); }
+.achat-idee { font-family: var(--font-edito); font-size: 1.3125rem; line-height: 1.45; margin: 26px 0 0; color: var(--ink); max-width: 34ch; }
+.achat .fiche-collection { margin: 16px 0 34px; }
+.achat .variations { margin-top: 6px; }
+.achat .achat-boutons { margin-top: 22px; }
+.achat .fiche-accs { margin-top: 46px; }
+.acc-faits { font-size: var(--fs-body-m); line-height: 1.6; margin: 0 0 14px; }
+.acc-corps .ref { font-size: var(--fs-body-s); color: var(--ink-soft); margin: 0 0 6px; }
+.acc-corps .ref a { border-bottom: 1px solid currentColor; }
+.acc-corps .attributs { margin-top: 18px; }
+@media (max-width: 1100px) { .page-fiche .fiche-haut { grid-template-columns: minmax(0, 1fr) 420px; } .page-fiche .achat { padding: 44px 34px 70px 32px; } }
+@media (max-width: 900px) {
+  .page-fiche .fiche-haut { grid-template-columns: 1fr; }
+  .page-fiche .gal { position: static; height: auto; min-height: 0; padding: 0; }
+  .page-fiche .gal-vue img { transform: scale(.96); }
+  .page-fiche .achat { min-height: 0; padding: 18px var(--gutter) 30px; }
+  .achat-tete h1 { font-size: 1.75rem; }
+  .achat-tete .achat-prix { font-size: 1.25rem; }
+  .achat-idee { font-size: 1.125rem; margin-top: 14px; max-width: none; }
+  .achat .fiche-collection { margin: 12px 0 24px; }
+  .achat .fiche-accs { margin-top: 34px; }
+}
+/* une piece qui a aussi une photo portee : la galerie defile normalement, rien n'est coupe */
+.page-fiche .gal:has(.gal-vue--porte) { position: static; height: auto; min-height: 0; align-content: start; padding-top: 40px; padding-bottom: 40px; }
+/* en-tete : plus d'air entre le logo et le menu (bureau) */
+@media (min-width: 1101px) {
+  .header-bar { padding: 24px var(--gutter) 26px; }
+  .menu-bar-link { padding: 8px 2px 22px; }
+  .menu-bar { gap: 44px; }
+}
+/* la piece reste sous l'en-tete, jamais dessous */
+.page-fiche .gal { top: 146px; height: calc(100vh - 146px); }
+.page-fiche .achat { min-height: calc(100vh - 146px); }
+@media (max-width: 1100px) { .page-fiche .gal { top: 112px; height: calc(100vh - 112px); } .page-fiche .achat { min-height: calc(100vh - 112px); } }
+@media (max-width: 900px) { .page-fiche .gal { top: auto; height: auto; } .page-fiche .achat { min-height: 0; } }
+/* « Toute la collection » se detache dans le panneau du menu, sans crier */
+.menu-col a[href$="toute-la-collection/index.html"], .mv-vue a[href$="toute-la-collection/index.html"] { font-weight: 600; color: var(--ink); }
+/* la phrase de la piece reprend le style du texte de fiche d'avant (Manrope, 13 px, gris fonce) */
+.achat-idee { font-family: var(--font-primary); font-size: 13px; line-height: 1.7; color: #333; max-width: none; margin: 20px 0 0; }
+@media (max-width: 900px) { .achat-idee { font-size: 13px; margin-top: 12px; } }
+/* telephone : l'image d'ouverture remplit l'ecran sous l'en-tete, quel que soit le telephone */
+@media (max-width: 900px) {
+  .block-text-on-full-media .hero { aspect-ratio: auto; height: calc(100svh - var(--hdr, 63px)); }
+}
+/* ordinateur : la barre de service se cache, elle descend quand la souris s'approche du haut */
+@media (min-width: 901px) and (hover: hover) {
+  .topbar { position: fixed; top: 0; left: 0; right: 0; transform: translateY(-100%); transition: transform .3s ease; z-index: 60; }
+  html.topbar-vue .topbar, .topbar:focus-within { transform: none; }
+  .header { transition: transform .3s ease; }
+  html.topbar-vue .header, .topbar:focus-within + .header { transform: translateY(var(--tb, 40px)); }
+}
+/* ordinateur : l'image d'ouverture ne depasse jamais la fenetre, le texte et le bouton sont visibles des l'ouverture */
+@media (min-width: 901px) {
+  .block-text-on-full-media .hero { max-height: calc(100svh - var(--hdr, 90px)); }
+}
+/* toute la collection : l'image d'ouverture prend toute la largeur, cadree sur le bracelet (cadrage de Raouf, 5 oct.) */
+@media (min-width: 901px) {
+  .liste-ouverture.liste-ouverture--nue { max-width: none; }
+  .liste-ouverture--nue img { width: 100%; aspect-ratio: 1.82; object-fit: cover; object-position: 50% 52%; }
+}
+/* telephone : la photo du bijou ne prend plus tout l'ecran (4/3, rien n'est coupe) */
+@media (max-width: 900px) {
+  .page-fiche .fiche-haut:not(.fiche-haut--carte) .gal-vue:not(.gal-vue--porte) img { aspect-ratio: 4 / 3; height: auto; object-fit: contain; }
+}
+/* passage d'une page a l'autre : un fondu lent, jamais de coupure seche */
+@keyframes page-arrive { from { opacity: 0; } to { opacity: 1; } }
+@keyframes bijou-arrive { from { opacity: 0; transform: scale(1.08); } to { opacity: 1; transform: none; } }
+body { animation: page-arrive .7s cubic-bezier(.2,.7,.2,1) both; }
+/* l'arrivee sur la fiche : la photo du bijou se pose, un peu plus lente que la page */
+.page-fiche .gal-groupe:not([hidden]) .gal-vue:first-child img { animation: bijou-arrive 1.1s cubic-bezier(.2,.7,.2,1) both; }
+/* le depart : la page s'efface vers le blanc, la photo cliquee grandit doucement */
+body.page-part main, body.page-part .breadcrumb, body.page-part footer { opacity: 0; transition: opacity .5s ease; }
+body.page-part .carte-choisie img { transform: scale(1.12) !important; transition: transform .55s cubic-bezier(.2,.7,.2,1) !important; }
+@media (prefers-reduced-motion: reduce) {
+  body, .page-fiche .gal-vue img { animation: none !important; }
+  body.page-part main, body.page-part .breadcrumb, body.page-part footer, body.page-part .carte-choisie img { transition: none !important; }
+}
+/* le temps d'un calcul de mise en page (site.js) : rien ne bouge */
+.pli-mesure main *, .pli-mesure .breadcrumb, .pli-mesure footer * { transform: none !important; transition: none !important; }
+/* panier vide : une rangee discrete de pieces accessibles */
+.panier-idees { border-top: 1px solid var(--rule); padding-top: 34px; margin-top: 10px; }
+.panier-idees .surtitre { text-align: center; margin: 0 0 26px; }
+.panier-idees .grid-results { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+/* telephone : Panier a droite de l'en-tete, en face de Menu */
+@media (max-width: 900px) {
+  .header .header-links a.lien-panier { display: inline-block; font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
+  .panier-idees .grid-results { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+/* telephone : l'image d'ouverture des pages editoriales entiere, jamais recadree ; le texte passe dessous */
+@media (max-width: 900px) {
+  .edito-ouverture .hero, .page-404 .edito-ouverture .hero { aspect-ratio: auto; height: auto; object-fit: initial; animation: none; }
+  .edito-ouverture::after { display: none; }
+  .edito-ouverture-texte { position: static; color: var(--ink); text-shadow: none; padding: 26px var(--gutter) 0; }
+  .edito-ouverture-texte .surtitre { color: var(--ink-soft); opacity: 1; }
+  .edito-ouverture-texte h1, .edito-ouverture-texte p { color: var(--ink); }
+  /* le fil d'ariane respire avant une image */
+  .breadcrumb + .edito-ouverture, .breadcrumb + .liste-ouverture { margin-top: 12px; }
+}
+/* telephone : les blocs arrivent en fondu avec un leger glissement, les bijoux d'une grille l'un apres l'autre */
+@media (max-width: 900px) {
+  .js .js-anim { opacity: 0; transform: translateY(22px); }
+  .js .js-anim.est-la, .block-text.js-anim.est-la { opacity: 1; transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+  .carte-anim { opacity: 0; transform: translateY(16px); }
+  .carte-anim.carte-la { opacity: 1; transform: none; transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+  .carte-anim.carte-la:nth-child(even) { transition-delay: .12s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .js-anim, .carte-anim { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+/* telephone : la photo d'ouverture editoriale tient entiere dans le premier ecran (une photo en hauteur se centre) */
+@media (max-width: 900px) {
+  .edito-ouverture .hero, .page-404 .edito-ouverture .hero { display: block; width: auto; max-width: 100%; max-height: calc(100svh - var(--hdr, 63px) - 150px); margin: 0 auto; }
+}
+/* telephone : les onglets du guide centres (et toujours defilables si l'ecran est trop etroit) */
+@media (max-width: 900px) {
+  .guide-rail a:first-child { margin-left: auto; }
+  .guide-rail a:last-child { margin-right: auto; }
+}
+/* telephone : le texte du guide respire sous la ligne des onglets */
+@media (max-width: 900px) { .guide-rail { margin-bottom: 0 !important; } .guide-rail + * { margin-top: 0 !important; padding-top: 34px; } }
+/* un lien-bouton reste blanc sur noir, meme deja visite (a:visited heritait du gris) */
+a.btn-panier, a.btn-panier:visited, a.btn-panier:hover { color: #fff; }
+/* panier vide, "Pour commencer" : un titre, une ligne, quatre pieces, un lien */
+.panier-idees { text-align: center; padding-top: 54px; margin-top: 20px; }
+.panier-idees .surtitre { margin: 0 0 12px; }
+.panier-idees-titre { font-family: var(--font-edito); font-weight: 400; font-size: var(--fs-h-l); margin: 0 0 10px; }
+.panier-idees-ligne { color: var(--ink-soft); margin: 0 0 34px; }
+.panier-idees .grid-results { text-align: left; padding-left: 0; padding-right: 0; }
+.panier-idees .product-card img { background: #f7f6f4; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
+.panier-idees .product-card:hover img { transform: scale(1.03); }
+.panier-idees-suite { display: inline-block; margin: 34px 0 10px; }
+@media (max-width: 900px) {
+  /* telephone : quatre pieces entieres, deux par rangee, rien ne depasse */
+  .panier-idees { padding-top: 40px; }
+  .panier-idees .grid-results { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 12px; }
+}
+/* rayon vide : une phrase et deux liens */
+.empty-state p { margin: 0 0 26px; }
+.empty-liens { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px 34px; margin: 0; }
+.empty-state .empty-liens a { border-bottom: 0; color: var(--ink); }
+/* telephone : une piece a plusieurs photos : elles se feuillettent de cote, une par ecran, sans rien couper ;
+   le nom, le prix et le bouton restent sur le premier ecran (avant : photos empilees, le nom 1 100 px plus bas) */
+.gal-points { display: none; }
+@media (max-width: 900px) {
+  .page-fiche .gal { flex-direction: column; align-items: stretch; }
+  .page-fiche .gal-groupe { display: flex; gap: 0; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .page-fiche .gal-groupe::-webkit-scrollbar { display: none; }
+  .page-fiche .gal-vue { flex: 0 0 100%; scroll-snap-align: start; }
+  .page-fiche .gal:has(.gal-vue--porte) { padding-top: 0; padding-bottom: 6px; }
+  .page-fiche .gal-vue--porte img { aspect-ratio: 4 / 3; object-fit: contain; }
+  .gal-points { display: flex; justify-content: center; gap: 7px; padding: 6px 0 2px; }
+  .gal-points i { width: 5px; height: 5px; border-radius: 50%; background: #d0d0d0; }
+  .gal-points i.is-on { background: var(--ink); }
+  .gal-groupe[hidden] + .gal-points { display: none; }
+}
+/* titres mot a mot : l'ecart entre les mots est un espace, plus une marge ; un mot qui passe a la ligne repart du bord */
+.ecrit { word-spacing: .28em; }
+.ecrit .mot + .mot { margin-left: 0; }
+.ecrit .count { margin-left: -.28em; }
+/* telephone : les en-tetes du tableau des tailles ne se touchent plus */
+@media (max-width: 900px) {
+  .table-tailles th { padding-right: 12px; vertical-align: bottom; letter-spacing: .06em; }
+  .table-tailles th:last-child { padding-right: 0; }
+}
+/* telephone, bas de fiche : la ligne des rayons tient sur une ligne (le nom de la piece, deja en haut de page, n'y est plus)
+   et le trait reste sous le mot (avant : 12 px plus bas, il barrait la seconde ligne) */
+@media (max-width: 900px) {
+  .fil-bas { flex-wrap: nowrap; }
+  .fil-bas > span:last-child, .fil-bas > .sep:nth-last-child(2) { display: none; }
+  .fil-bas a { border-bottom: 0; text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+}
+/* ordinateur : une piece a plusieurs photos : la galerie defile avec la page, la photo du bijou en premier
+   (avant : les photos centrees dans une case fixe, le bijou sortait par le haut, on ne voyait que la photo portee) */
+@media (min-width: 901px) {
+  .page-fiche .gal:has(.gal-groupe:not([hidden]) .gal-vue + .gal-vue) { position: static; height: auto; min-height: 0; align-content: start; padding-top: 40px; padding-bottom: 40px; }
+}
+/* menu telephone, Joaillerie : les trois collections forment leur groupe, sous un filet noir, ecrites comme des noms (serif) */
+@media (max-width: 900px) {
+  .mv-vue ul:has(+ .mv-titre--col) { margin-bottom: 14px; }
+  .mv-titre--col { border-top: 1px solid var(--ink); padding-top: 22px; margin: 0 0 2px; }
+  .mv-collections a { font-family: var(--font-edito); font-size: 1.375rem; letter-spacing: 0; text-transform: none; padding: 13px 0; }
+}
+/* telephone : la page ne se tire pas de cote. Le menu range a gauche de l'ecran ne se laisse plus entrevoir,
+   et les photos d'une piece qu'on feuillette n'entrainent pas la page au bout de la rangee */
+@media (max-width: 900px) {
+  html { overflow-x: hidden; overflow-x: clip; overscroll-behavior-x: none; }
+  body { overflow-x: clip; overscroll-behavior-x: none; }
+  .menu-vertical { visibility: hidden; transition: transform .34s cubic-bezier(.2,.7,.2,1), visibility 0s linear .34s; }
+  .menu-vertical.is-open { visibility: visible; transition: transform .34s cubic-bezier(.2,.7,.2,1), visibility 0s; }
+  .page-fiche .gal-groupe { overscroll-behavior-x: contain; }
+}
+/* menu telephone : Retour est un lien simple, comme « Retour a la collection » du panier (plus de pastille grise) */
+@media (max-width: 900px) {
+  .btn-retour, .btn-retour:hover { background: none; border: 0; border-radius: 0; padding: 12px 0; margin: 8px 0 0; font-family: var(--font-primary); font-size: var(--fs-body-m); letter-spacing: 0; text-transform: none; }
+}
+/* menu telephone, vue Joaillerie : tout tient dans l'ecran d'un iPhone sans defiler (le Retour ne sort plus par le haut),
+   et le panneau ne bouge jamais de cote */
+@media (max-width: 900px) {
+  .menu-vertical { overflow-x: hidden; padding-bottom: 12px; }
+  .mv-collections a { font-size: 1.1875rem; line-height: 1.25; }
+  .mv-titre--col { padding-top: 14px; }
+  .mv-vue ul.mv-collections { margin-bottom: 8px; }
+  .mv-vue ul:last-of-type { margin-bottom: 0; }
+}
+/* ---- ce qui se presse repond : un leger enfoncement sous le doigt, puis le choix se pose ---- */
+.opt, .choix-btn, .ct-p, .btn-pay, .btn-bordé { transition: transform .22s cubic-bezier(.2,.7,.2,1), border-color .3s ease, background-color .3s ease, color .3s ease; -webkit-tap-highlight-color: transparent; }
+.opt:active, .choix-btn:active, .ct-p:active { transform: scale(.94); }
+.btn-pay:active, .btn-bordé:active { transform: scale(.985); }
+.opt.is-on { animation: se-pose-clair .6s cubic-bezier(.2,.7,.2,1); }
+.choix-btn.is-on { animation: se-pose .5s cubic-bezier(.2,.7,.2,1); }
+@keyframes se-pose { from { transform: scale(.93); } to { transform: none; } }
+@keyframes se-pose-clair { from { transform: scale(.93); background-color: rgba(214,190,140,.34); } to { transform: none; background-color: rgba(214,190,140,0); } }
+/* ---- Ajouter au panier : le bouton reste noir. Sous le doigt il s'enfonce a peine ; a l'ajout un reflet champagne
+   le traverse, un fil d'or se tire sous le mot, et « Ajoute au panier » se pose doucement, comme les titres ---- */
+.btn-panier {
+  background-image: linear-gradient(110deg, transparent 42%, rgba(214,190,140,.3) 50%, transparent 58%), linear-gradient(rgb(214,190,140), rgb(214,190,140));
+  background-repeat: no-repeat; background-size: 260% 100%, 0% 1px; background-position: 130% 0, 50% calc(100% - 10px);
+  transition: transform .28s cubic-bezier(.2,.7,.2,1), background-size .7s cubic-bezier(.2,.7,.2,1), letter-spacing .5s cubic-bezier(.2,.7,.2,1);
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-panier:active { transform: scale(.985); letter-spacing: .16em; }
+@media (hover: hover) { .btn-panier:hover { background-position: -30% 0, 50% calc(100% - 10px); transition: background-position 1.5s cubic-bezier(.2,.7,.2,1), transform .28s cubic-bezier(.2,.7,.2,1); } }
+.btn-panier.is-ok { animation: bp-ajoute 1.7s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes bp-ajoute {
+  0% { background-position: 130% 0, 50% calc(100% - 10px); background-size: 260% 100%, 0% 1px; }
+  60% { background-size: 260% 100%, 38% 1px; }
+  100% { background-position: -30% 0, 50% calc(100% - 10px); background-size: 260% 100%, 38% 1px; }
+}
+.btn-panier.is-ok::before, .btn-panier.is-ok::after { background: rgb(232,214,172); }
+.bp-mot { display: inline-block; opacity: 0; transform: translateY(.5em); filter: blur(2px); animation: mot-arrive 1s cubic-bezier(.2,.7,.2,1) .12s forwards; }
+@media (prefers-reduced-motion: reduce) {
+  .btn-panier.is-ok, .opt.is-on, .choix-btn.is-on { animation: none; }
+  .bp-mot { animation: none; opacity: 1; transform: none; filter: none; }
+}
+/* la lettre de la maison : le panneau qui s'ouvre sur « S'inscrire » (pied de page). Au centre sur ordinateur,
+   en feuille par le bas sur telephone ; un champ, un bouton, rien d'autre */
+.modale--lettre { justify-content: center; align-items: center; background: rgba(17,17,17,.34); }
+.modale--lettre .modale-boite { position: relative; width: 500px; height: auto; padding: 54px 48px 44px; text-align: center; transform: translateY(16px); }
+.modale--lettre .modale-fermer { position: absolute; top: 16px; right: 18px; padding: 8px; color: var(--ink); }
+.modale--lettre .surtitre { font-family: var(--font-mono); letter-spacing: .16em; text-transform: uppercase; margin: 0 0 14px; }
+.modale--lettre h2 { font-family: var(--font-edito); font-weight: 400; font-size: 1.875rem; line-height: 1.2; margin: 0 0 12px; }
+.lettre-texte { margin: 0 auto 30px; max-width: 30ch; color: #333; line-height: 1.6; }
+.lettre-form { display: grid; gap: 18px; }
+.lettre-form input { width: 100%; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; background: transparent; font-family: inherit; font-size: 1rem; padding: 12px 0; text-align: center; outline: none; color: var(--ink); }
+.lettre-form input::placeholder { color: var(--ink-soft); }
+.lettre-form input:focus { border-bottom-color: rgb(190,164,110); }
+.lettre-form .btn-panier { width: 100%; }
+.lettre-form .btn-panier[disabled] { opacity: .55; cursor: progress; }
+.lettre-note { margin: 18px 0 0; font-size: var(--fs-body-s); color: var(--ink-soft); line-height: 1.6; }
+.lettre-note a { color: var(--ink); border-bottom: 1px solid currentColor; }
+@media (max-width: 900px) {
+  .modale--lettre { align-items: flex-end; }
+  .modale--lettre .modale-boite { width: 100%; padding: 46px var(--gutter) calc(30px + env(safe-area-inset-bottom)); transform: translateY(40px); }
+  .modale--lettre h2 { font-size: 1.625rem; }
+}
+/* la lettre, une fois l'adresse laissee : Merci en grand avec son etincelle, un fil d'or qui se tire, la phrase,
+   l'adresse relue en petites capitales, un lien pour reprendre. Chaque ligne se pose apres la precedente */
+.modale--lettre .est-merci h2 { font-size: 2.75rem; margin-bottom: 0; }
+.modale--lettre .est-merci h2::after { content: ""; display: block; height: 1px; width: 0; margin: 20px auto 22px; background: rgb(214,190,140); animation: fil-or 1.3s cubic-bezier(.2,.7,.2,1) .45s forwards; }
+@keyframes fil-or { to { width: 72px; } }
+.modale--lettre .etincelle { background: rgb(198,172,118); }
+.est-merci .lettre-texte { margin-bottom: 0; max-width: 32ch; }
+.est-merci .lettre-texte .bp-mot { animation-delay: .5s; }
+.est-merci .lettre-note { margin-top: 26px; display: grid; gap: 26px; justify-items: center; }
+.lettre-adresse { font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); animation-delay: .85s; overflow-wrap: anywhere; }
+.lettre-fin { background: none; border: 0; border-bottom: 1px solid var(--ink); padding: 0 0 5px; cursor: pointer; font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .14em; text-transform: uppercase; color: var(--ink); animation-delay: 1.15s; }
+/* le champ rempli par le navigateur reste blanc (plus de fond bleu) */
+.lettre-form input:-webkit-autofill, .lettre-form input:-webkit-autofill:focus { -webkit-box-shadow: 0 0 0 1000px #fff inset; -webkit-text-fill-color: var(--ink); caret-color: var(--ink); }
+@media (max-width: 900px) { .modale--lettre .est-merci h2 { font-size: 2.25rem; } }
+@media (prefers-reduced-motion: reduce) { .modale--lettre .est-merci h2::after { animation: none; width: 72px; } }
+/* panier : la meme piece en plusieurs exemplaires tient sur une ligne, « × 2 » a cote du nom */
+.panier-ligne .qte { font-family: var(--font-mono); font-size: var(--fs-body-s); letter-spacing: .1em; color: var(--ink); margin-left: 12px; white-space: nowrap; }
+.panier-ligne .retirer + .retirer { margin-left: 18px; }
+/* fiche : la question « en ajouter une seconde ? » sous le bouton, deux reponses soulignees */
+.achat-flash .flash-oui { background: none; border: 0; border-bottom: 1px solid currentColor; padding: 0 0 1px; margin: 0 16px 0 6px; cursor: pointer; font: inherit; color: var(--ink); }

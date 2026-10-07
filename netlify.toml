@@ -1,0 +1,27 @@
+# Alaya : site statique + une seule fonction, celle qui cree la session de paiement Stripe.
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["netlify/functions/catalogue.json"]
+
+# Ce que le navigateur garde : les feuilles et scripts portent un numero (?v=...) et les polices ne changent pas, un an ;
+# les images, un mois (une photo retouchee peut garder son nom) ; les pages, toujours reverifiees.
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
