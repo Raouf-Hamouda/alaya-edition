@@ -1,0 +1,4 @@
+.git
+*.bak_*
+.DS_Store
+netlify

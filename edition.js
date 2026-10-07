@@ -7,7 +7,8 @@
   var MAGASIN = 'alaya-edition:' + location.pathname;
   var TEXTES = 'h1,h2,h3,h4,h5,p,li,span,a,button,figcaption,dt,dd,td,th,label,summary,legend,b,strong,em,small,blockquote,option';
   var IMAGES = 'main img';
-  var sauve = {};
+  var SERVEUR = /^https?:$/.test(location.protocol) ? '/api/edition' : '';
+  var sauve = {}, etat = '';
   try { sauve = JSON.parse(localStorage.getItem(MAGASIN) || '{}'); } catch (e) {}
   if (!sauve.t) sauve.t = {};
   if (!sauve.i) sauve.i = {};
@@ -27,14 +28,40 @@
     for (var k = 0; k < parts.length && el; k++) el = el.children[parts[k]];
     return el || null;
   }
-  function ecrire() { try { localStorage.setItem(MAGASIN, JSON.stringify(sauve)); } catch (e) {} }
+  var minuteur = null;
+  function montrer(txt) { etat = txt; var e = barre && barre.querySelector('.edition-etat'); if (e) e.textContent = txt; }
+  function envoyer() {
+    if (!SERVEUR) return;
+    montrer('Enregistrement');
+    fetch(SERVEUR, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p: location.pathname, t: sauve.t, i: sauve.i, quand: sauve.quand }) })
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function () { montrer('Enregistré'); })
+      .catch(function () { montrer('Non enregistré, réessayez'); });
+  }
+  function ecrire() {
+    sauve.quand = new Date().toISOString();
+    try { localStorage.setItem(MAGASIN, JSON.stringify(sauve)); } catch (e) {}
+    clearTimeout(minuteur); minuteur = setTimeout(envoyer, 1200);
+  }
 
-  /* application de ce qui a ete sauve, a chaque ouverture de la page */
-  Object.keys(sauve.t).forEach(function (ch) { var el = resoudre(ch); if (el) el.innerHTML = sauve.t[ch]; });
-  Object.keys(sauve.i).forEach(function (ch) {
-    var el = resoudre(ch); if (!el) return;
-    el.style.width = sauve.i[ch][0] + 'px'; el.style.height = sauve.i[ch][1] + 'px'; el.style.maxWidth = 'none';
-  });
+  /* application de ce qui a ete sauve, a chaque ouverture de la page : d'abord la copie locale, puis le serveur si plus recent */
+  function appliquer(s) {
+    Object.keys(s.t).forEach(function (ch) { var el = resoudre(ch); if (el) el.innerHTML = s.t[ch]; });
+    Object.keys(s.i).forEach(function (ch) {
+      var el = resoudre(ch); if (!el) return;
+      el.style.width = s.i[ch][0] + 'px'; el.style.height = s.i[ch][1] + 'px'; el.style.maxWidth = 'none';
+    });
+  }
+  appliquer(sauve);
+  if (SERVEUR) fetch(SERVEUR + '?p=' + encodeURIComponent(location.pathname), { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(function (s) {
+      if (!s || !s.quand || (sauve.quand && sauve.quand > s.quand)) return;
+      sauve = { t: s.t || {}, i: s.i || {}, quand: s.quand };
+      try { localStorage.setItem(MAGASIN, JSON.stringify(sauve)); } catch (e) {}
+      appliquer(sauve); replacer();
+    }).catch(function () {});
 
   var css = document.createElement('style'); css.id = 'edition-style';
   css.textContent =
@@ -44,7 +71,8 @@
     '.edition-poignee:after{content:"";position:absolute;right:3px;bottom:3px;width:6px;height:6px;border-right:1px solid #111;border-bottom:1px solid #111}' +
     '.edition-barre{position:fixed;left:0;right:0;bottom:0;z-index:1000;display:flex;align-items:center;gap:18px;padding:12px 24px;background:#fff;border-top:1px solid #111;font:500 11px/1 var(--font-mono,monospace);letter-spacing:.18em;text-transform:uppercase;color:#111}' +
     '.edition-barre button{font:inherit;letter-spacing:inherit;text-transform:inherit;background:none;border:0;padding:0;color:#111;cursor:pointer;text-decoration:underline;text-underline-offset:4px}' +
-    '.edition-barre .edition-nom{margin-right:auto;text-decoration:none}' +
+    '.edition-barre .edition-nom{text-decoration:none}' +
+    '.edition-barre .edition-etat{margin-right:auto;text-transform:none;letter-spacing:0;font-family:var(--font-primary,sans-serif);font-size:12px;color:#666}' +
     '[data-edition] body,[data-edition] main{padding-bottom:60px}';
   document.head.appendChild(css);
 
@@ -116,13 +144,18 @@
     barre = document.createElement('div');
     barre.className = 'edition-barre';
     barre.innerHTML = '<span class="edition-nom">Mode édition</span>' +
+      '<span class="edition-etat">' + (SERVEUR ? (etat || 'Les modifications s\'enregistrent toutes seules') : 'Hors ligne : modifications gardées dans ce navigateur') + '</span>' +
       '<button type="button" data-act="telecharger">Télécharger la page</button>' +
       '<button type="button" data-act="retablir">Rétablir</button>' +
       '<button type="button" data-act="quitter">Quitter</button>';
     barre.addEventListener('click', function (e) {
       var b = e.target.closest('button'); if (!b) return;
       if (b.dataset.act === 'quitter') sortir();
-      if (b.dataset.act === 'retablir' && confirm('Effacer toutes les modifications de cette page ?')) { localStorage.removeItem(MAGASIN); location.reload(); }
+      if (b.dataset.act === 'retablir' && confirm('Effacer toutes les modifications de cette page ?')) {
+        localStorage.removeItem(MAGASIN); sauve = { t: {}, i: {} };
+        if (SERVEUR) fetch(SERVEUR, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ p: location.pathname, t: {}, i: {} }) }).finally(function () { location.reload(); });
+        else location.reload();
+      }
       if (b.dataset.act === 'telecharger') telecharger();
     });
     document.body.appendChild(barre);
